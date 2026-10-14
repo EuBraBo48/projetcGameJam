@@ -1,13 +1,22 @@
 [gd_scene format=3 uid="uid://tfeu8x4ujmow"]
 
 [ext_resource type="Script" uid="uid://cqd0mejaxuunc" path="res://scrits/player.gd" id="1_8or6t"]
+[ext_resource type="Script" uid="uid://cdj0xnp17rdk2" path="res://scrits/head.gd" id="2_unwft"]
+[ext_resource type="PackedScene" uid="uid://cxrgqy2mwqqvu" path="res://cenas/models/m_1.tscn" id="3_kthid"]
+[ext_resource type="PackedScene" uid="uid://djuvjj3nygker" path="res://cenas/models/m_2.tscn" id="4_xojfc"]
+[ext_resource type="PackedScene" uid="uid://ciok7kbr0tfe4" path="res://models/mao/m3.glb" id="5_8v4ht"]
+[ext_resource type="PackedScene" uid="uid://b13islxb1e5k0" path="res://cenas/models/m_4.tscn" id="6_4y2i1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yf5fn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
-[node name="player" type="CharacterBody3D" unique_id=1142826060]
+[node name="player" type="CharacterBody3D" unique_id=1142826060 groups=["player"]]
 script = ExtResource("1_8or6t")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1614515072]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03008008, 0.44410962, -0.42560685)
+script = ExtResource("2_unwft")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2087020867]
 mesh = SubResource("CapsuleMesh_yf5fn")
@@ -15,7 +24,17 @@ mesh = SubResource("CapsuleMesh_yf5fn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289714203]
 shape = SubResource("CapsuleShape3D_g4v7s")
 
-[node name="head" type="Node3D" parent="." unique_id=910205505]
+[node name="m1" parent="." unique_id=313733323 instance=ExtResource("3_kthid")]
+transform = Transform3D(-0.29932806, 0, -0.02006808, 0, 0.29999998, 0, 0.02006808, 0, -0.29932806, 0.13530284, 0.08725673, -0.109942436)
 
-[node name="Camera3D" type="Camera3D" parent="head" unique_id=1614515072]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47675174, -0.40918744)
+[node name="m2" parent="." unique_id=2120074028 instance=ExtResource("4_xojfc")]
+transform = Transform3D(-2.4868455, 0, -0.25612497, 0, 2.5, 0, 0.25612497, 0, -2.4868455, -0.037117124, 0.12636149, -0.58304965)
+visible = false
+
+[node name="m3" parent="." unique_id=1845516931 instance=ExtResource("5_8v4ht")]
+transform = Transform3D(-0.029991588, 0, 0.0007103456, 0, 0.029999997, 0, -0.0007103456, 0, -0.029991588, 0, 0, -0.62564373)
+visible = false
+
+[node name="m4" parent="." unique_id=242677855 instance=ExtResource("6_4y2i1")]
+transform = Transform3D(-4.371139e-08, 0, 1, -0.22208738, 0.9750268, -9.7077475e-09, -0.9750268, -0.22208738, -4.2619774e-08, -0.039937317, -0.00024092197, -0.40374994)
+visible = false

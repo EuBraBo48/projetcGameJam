@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://r4tlfvo84lx7"]
+
+[ext_resource type="Script" uid="uid://bk4w2b1paa3j8" path="res://scrits/dialog.gd" id="1_w71y7"]
+
+[node name="Dialog" type="Control" unique_id=1036318063]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w71y7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=523602451]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 468.0
+offset_right = 826.0
+offset_bottom = 612.0
+color = Color(0, 0, 0, 1)
+
+[node name="name" type="Label" parent="." unique_id=241364516]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -545.0
+offset_top = 143.0
+offset_right = -433.0
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.3764706, 0, 1)
+theme_override_colors/font_outline_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
+theme_override_font_sizes/font_size = 20
+text = "sdsdsdssd"
+horizontal_alignment = 1
+
+[node name="dialog" type="RichTextLabel" parent="." unique_id=168610087]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.375
+anchor_top = 0.822
+anchor_right = 0.375
+anchor_bottom = 0.822
+offset_left = -398.0
+offset_top = -43.656006
+offset_right = 389.0
+offset_bottom = 74.343994
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 20
+text = "sdsdefefsdddsddwddsd"

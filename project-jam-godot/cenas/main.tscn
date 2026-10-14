@@ -1,3 +1,44 @@
 [gd_scene format=3 uid="uid://fwpksf0x8fb3"]
 
+[ext_resource type="PackedScene" uid="uid://dw47gnftmhj4w" path="res://cenas/models/housevigili.tscn" id="1_t4ukd"]
+[ext_resource type="PackedScene" uid="uid://tfeu8x4ujmow" path="res://cenas/player.tscn" id="2_4fhxt"]
+[ext_resource type="PackedScene" uid="uid://dwxpur60dq1ks" path="res://cenas/placa_da_casa.tscn" id="2_b30p5"]
+[ext_resource type="PackedScene" uid="uid://dkor4a1xw5hxo" path="res://cenas/caro_mo.tscn" id="3_4fhxt"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t4ukd"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_4fhxt"]
+sky_material = SubResource("ProceduralSkyMaterial_t4ukd")
+
+[sub_resource type="Environment" id="Environment_b30p5"]
+background_mode = 2
+sky = SubResource("Sky_4fhxt")
+
 [node name="main" type="Node3D" unique_id=1322923223]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1695804952]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=127849189]
+environment = SubResource("Environment_b30p5")
+
+[node name="housevigili" parent="." unique_id=86652010 instance=ExtResource("1_t4ukd")]
+
+[node name="placaDaCasa" parent="housevigili" unique_id=699684990 instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7196484, 1.6630411, -0.27661914)
+
+[node name="placaDaCasa2" parent="housevigili" unique_id=1755261138 instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.704803, 1.6630411, 4.802108)
+
+[node name="player" parent="." unique_id=1142826060 instance=ExtResource("2_4fhxt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 13.6653595, -10.731902)
+
+[node name="caroMO" parent="." unique_id=753883478 node_paths=PackedStringArray("door_point") instance=ExtResource("3_4fhxt")]
+transform = Transform3D(-0.35469726, 0, 3.9842427, 0, 4, 0, -3.9842427, 0, -0.35469726, 18, 2.497529, 0)
+door_point = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="caroMO" unique_id=250413662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41922656, 0.20470524, -0.63403463)
