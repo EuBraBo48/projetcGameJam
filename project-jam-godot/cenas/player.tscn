@@ -6,35 +6,49 @@
 [ext_resource type="PackedScene" uid="uid://djuvjj3nygker" path="res://cenas/models/m_2.tscn" id="4_xojfc"]
 [ext_resource type="PackedScene" uid="uid://ciok7kbr0tfe4" path="res://models/mao/m3.glb" id="5_8v4ht"]
 [ext_resource type="PackedScene" uid="uid://b13islxb1e5k0" path="res://cenas/models/m_4.tscn" id="6_4y2i1"]
+[ext_resource type="PackedScene" uid="uid://dippydeg72fyl" path="res://models/mao/m5.glb" id="7_4y2i1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yf5fn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+radius = 0.41015625
+height = 1.5678711
 
-[node name="player" type="CharacterBody3D" unique_id=1142826060 groups=["player"]]
+[node name="player" type="CharacterBody3D" unique_id=1142826060 node_paths=PackedStringArray("ray_cast_3d") groups=["player"]]
 script = ExtResource("1_8or6t")
+ray_cast_3d = NodePath("Camera3D/RayCast3D")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1614515072]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03008008, 0.44410962, -0.42560685)
 script = ExtResource("2_unwft")
 
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1532099310]
+transform = Transform3D(0.024422208, 0, 0.9928397, 0, 1, 0, -1.4022722, 0, 0.017291462, 0.018591285, -0.042876482, -0.056839228)
+target_position = Vector3(1, 0, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2087020867]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_yf5fn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289714203]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0056152344, -0.00090789795)
 shape = SubResource("CapsuleShape3D_g4v7s")
 
 [node name="m1" parent="." unique_id=313733323 instance=ExtResource("3_kthid")]
-transform = Transform3D(-0.29932806, 0, -0.02006808, 0, 0.29999998, 0, 0.02006808, 0, -0.29932806, 0.13530284, 0.08725673, -0.109942436)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.13530284, 0.08725673, -0.109942436)
+visible = false
 
 [node name="m2" parent="." unique_id=2120074028 instance=ExtResource("4_xojfc")]
-transform = Transform3D(-2.4868455, 0, -0.25612497, 0, 2.5, 0, 0.25612497, 0, -2.4868455, -0.037117124, 0.12636149, -0.58304965)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.037117124, 0.12636149, -0.58304965)
 visible = false
 
 [node name="m3" parent="." unique_id=1845516931 instance=ExtResource("5_8v4ht")]
-transform = Transform3D(-0.029991588, 0, 0.0007103456, 0, 0.029999997, 0, -0.0007103456, 0, -0.029991588, 0, 0, -0.62564373)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.62564373)
 visible = false
 
 [node name="m4" parent="." unique_id=242677855 instance=ExtResource("6_4y2i1")]
-transform = Transform3D(-4.371139e-08, 0, 1, -0.22208738, 0.9750268, -9.7077475e-09, -0.9750268, -0.22208738, -4.2619774e-08, -0.039937317, -0.00024092197, -0.40374994)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, -0.039937317, -0.00024092197, -0.40374994)
 visible = false
+
+[node name="m5" parent="." unique_id=716026961 instance=ExtResource("7_4y2i1")]
+transform = Transform3D(-0.009983864, 0, 0.0005678545, 0, 0.01, 0, -0.0005678545, 0, -0.009983864, 0.11263585, 0.31493223, -0.878749)

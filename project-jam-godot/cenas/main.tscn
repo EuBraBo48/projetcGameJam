@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://fwpksf0x8fb3"]
 
+[ext_resource type="Script" uid="uid://b0fk0dwn85no5" path="res://scrits/main.gd" id="1_bhvw8"]
 [ext_resource type="PackedScene" uid="uid://dw47gnftmhj4w" path="res://cenas/models/housevigili.tscn" id="1_t4ukd"]
 [ext_resource type="PackedScene" uid="uid://tfeu8x4ujmow" path="res://cenas/player.tscn" id="2_4fhxt"]
 [ext_resource type="PackedScene" uid="uid://dwxpur60dq1ks" path="res://cenas/placa_da_casa.tscn" id="2_b30p5"]
 [ext_resource type="PackedScene" uid="uid://dkor4a1xw5hxo" path="res://cenas/caro_mo.tscn" id="3_4fhxt"]
+[ext_resource type="PackedScene" uid="uid://chk2ly7awk8p" path="res://cenas/hud.tscn" id="5_5wwvk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t4ukd"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -16,7 +18,15 @@ sky_material = SubResource("ProceduralSkyMaterial_t4ukd")
 background_mode = 2
 sky = SubResource("Sky_4fhxt")
 
-[node name="main" type="Node3D" unique_id=1322923223]
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+radius = 1.4527528
+
+[node name="main" type="Node3D" unique_id=1322923223 node_paths=PackedStringArray("input_label2", "ponto", "pontoDoPl", "player")]
+script = ExtResource("1_bhvw8")
+input_label2 = NodePath("housevigili/Area3D/Label3D")
+ponto = NodePath("housevigili/Marker3D")
+pontoDoPl = NodePath("player/Marker3D")
+player = NodePath("player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1695804952]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -129,12 +139,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.855954, 2.3852956, 11.26106
 [node name="placaDaCasa6" parent="housevigili" unique_id=200669005 instance=ExtResource("2_b30p5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.855954, 3.4824214, 11.261069)
 
+[node name="Area3D" type="Area3D" parent="housevigili" unique_id=852798256]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="housevigili/Area3D" unique_id=460105941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6127243, 1.231735, -3.8387313)
+shape = SubResource("SphereShape3D_g4v7s")
+
+[node name="Label3D" type="Label3D" parent="housevigili/Area3D" unique_id=1831450298]
+transform = Transform3D(0.46354526, 0, 0.8860733, 0, 1, 0, -0.8860733, 0, 0.46354526, -5.528352, 1.8650131, -3.6743808)
+visible = false
+billboard = 1
+text = "E"
+
+[node name="Marker3D" type="Marker3D" parent="housevigili" unique_id=2007448168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6466327, 0.8318367, -4.9506235)
+
 [node name="player" parent="." unique_id=1142826060 instance=ExtResource("2_4fhxt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 13.6653595, -10.731902)
 
+[node name="Marker3D" type="Marker3D" parent="player" unique_id=726124289]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0284729, -0.12727833, -1.8017569)
+
 [node name="caroMO" parent="." unique_id=753883478 node_paths=PackedStringArray("door_point") instance=ExtResource("3_4fhxt")]
-transform = Transform3D(-0.35469726, 0, 3.9842427, 0, 4, 0, -3.9842427, 0, -0.35469726, 18, 2.497529, 0)
+transform = Transform3D(-0.3014927, 0, 3.3866065, 0, 3.4, 0, -3.3866065, 0, -0.3014927, 18.862724, 2.0115256, 0)
 door_point = NodePath("Marker3D")
 
 [node name="Marker3D" type="Marker3D" parent="caroMO" unique_id=250413662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41922656, 0.20470524, -0.63403463)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1101690922]
+
+[node name="hud" parent="CanvasLayer" unique_id=798942227 instance=ExtResource("5_5wwvk")]
+
+[connection signal="body_entered" from="housevigili/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="housevigili/Area3D" to="." method="_on_area_3d_body_exited"]

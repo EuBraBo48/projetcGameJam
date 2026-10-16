@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://chk2ly7awk8p"]
+
+[ext_resource type="Script" uid="uid://lnegiujtdiig" path="res://scrits/hud.gd" id="1_nkjil"]
+
+[node name="hud" type="Control" unique_id=798942227 node_paths=PackedStringArray("info")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nkjil")
+info = NodePath("menu com listagem/info")
+
+[node name="hora" type="Label" parent="." unique_id=484912107]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 25.0
+offset_right = 73.0
+offset_bottom = 48.0
+text = "12:12"
+
+[node name="menu com listagem" type="Control" parent="." unique_id=2073115474]
+anchors_preset = 0
+offset_right = 1155.0
+offset_bottom = 650.0
+
+[node name="ColorRect" type="ColorRect" parent="menu com listagem" unique_id=1321450825]
+layout_mode = 0
+offset_left = 769.0
+offset_top = 28.0
+offset_right = 1108.0
+offset_bottom = 498.0
+color = Color(0, 0, 0, 1)
+
+[node name="info" type="RichTextLabel" parent="menu com listagem" unique_id=1341161414]
+layout_mode = 0
+offset_left = 791.0
+offset_top = 77.0
+offset_right = 1006.0
+offset_bottom = 324.0
+text = "E̶u̶f̶i̶z̶i̶s̶s̶o̶"
+
+[node name="imagan" type="ColorRect" parent="." unique_id=255230663]
+layout_mode = 0
+offset_left = 959.0
+offset_top = 556.0
+offset_right = 1052.0
+offset_bottom = 647.0
+
+[node name="Label" type="Label" parent="." unique_id=858953246]
+layout_mode = 0
+offset_left = 1064.0
+offset_top = 20.0
+offset_right = 1136.0
+offset_bottom = 43.0
+text = "atividade"
