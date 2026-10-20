@@ -1,9 +1,16 @@
 [gd_scene format=3 uid="uid://dwxpur60dq1ks"]
 
+[ext_resource type="Script" uid="uid://6jygnt0afcng" path="res://scrits/placa_da_casa.gd" id="1_67k27"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
 size = Vector3(0.001, 1, 1)
 
-[node name="placaDaCasa" type="Node3D" unique_id=699684990]
+[sub_resource type="SphereShape3D" id="SphereShape3D_wbs2t"]
+radius = 1.4158221
+
+[node name="placaDaCasa" type="Node3D" unique_id=699684990 node_paths=PackedStringArray("label_3d")]
+script = ExtResource("1_67k27")
+label_3d = NodePath("Label3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1537579293]
 transform = Transform3D(25.948805, 0, 0, 0, 0.24000001, 0, 0, 0, 0.4, 0, 0, 0)
@@ -12,3 +19,11 @@ mesh = SubResource("BoxMesh_g4v7s")
 [node name="Label3D" type="Label3D" parent="." unique_id=703926826]
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0.021083057, 0, 0)
 text = "00"
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1046763148]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1105535724]
+shape = SubResource("SphereShape3D_wbs2t")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

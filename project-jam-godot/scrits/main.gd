@@ -14,7 +14,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if estNaAre and Input.is_action_just_pressed("interagir") and Gobla.caixaCOLETADA == false:
+	if estNaAre and Input.is_action_just_pressed("interagir") and Gobla.atividadeDahora == "PODEPEGACAIXA":
 		var caixa = CAIXAS.instantiate()
 		caixa.pontoCaixa = pontoDoPl
 		caixa.rayJogador = player.ray_cast_3d

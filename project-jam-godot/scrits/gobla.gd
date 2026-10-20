@@ -1,3 +1,4 @@
 extends Node
 
-var caixaCOLETADA: bool = false
+
+var atividadeDahora: String = "PODEPEGACAIXA"
