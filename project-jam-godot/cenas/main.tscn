@@ -6,165 +6,202 @@
 [ext_resource type="PackedScene" uid="uid://dwxpur60dq1ks" path="res://cenas/placa_da_casa.tscn" id="2_b30p5"]
 [ext_resource type="PackedScene" uid="uid://dkor4a1xw5hxo" path="res://cenas/caro_mo.tscn" id="3_4fhxt"]
 [ext_resource type="PackedScene" uid="uid://chk2ly7awk8p" path="res://cenas/hud.tscn" id="5_5wwvk"]
+[ext_resource type="Script" uid="uid://bn8ihg1tuqhe8" path="res://scrits/dialogos.gd" id="7_l8342"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t4ukd"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bhvw8"]
+sky_top_color = Color(0.3581875, 0.36431646, 0.20866138, 1)
+sky_horizon_color = Color(0.18923894, 0.1892201, 0.16588119, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Sky" id="Sky_4fhxt"]
-sky_material = SubResource("ProceduralSkyMaterial_t4ukd")
+[sub_resource type="Sky" id="Sky_l8342"]
+sky_material = SubResource("ProceduralSkyMaterial_bhvw8")
 
-[sub_resource type="Environment" id="Environment_b30p5"]
+[sub_resource type="Environment" id="Environment_v1d1r"]
 background_mode = 2
-sky = SubResource("Sky_4fhxt")
+sky = SubResource("Sky_l8342")
+fog_enabled = true
+fog_light_energy = 0.39
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
-radius = 1.4527528
+radius = 1.9571645
 
-[node name="main" type="Node3D" unique_id=1322923223 node_paths=PackedStringArray("input_label2", "ponto", "pontoDoPl", "player")]
+[node name="main" type="Node3D" unique_id=1322923223 node_paths=PackedStringArray("input_label2", "ponto", "pontoDoPl", "player", "dialogos")]
 script = ExtResource("1_bhvw8")
 input_label2 = NodePath("housevigili/Area3D/Label3D")
 ponto = NodePath("housevigili/Marker3D")
 pontoDoPl = NodePath("player/Marker3D")
 player = NodePath("player")
+dialogos = NodePath("CanvasLayer/dialogos")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1695804952]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=127849189]
-environment = SubResource("Environment_b30p5")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2082205955]
+environment = SubResource("Environment_v1d1r")
 
 [node name="housevigili" parent="." unique_id=86652010 instance=ExtResource("1_t4ukd")]
 
-[node name="placaDaCasa" parent="housevigili" unique_id=699684990 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7196484, 1.6630411, -0.27661914)
-numeroDaCasa = "A12"
+[node name="placaDaCasa" parent="housevigili" unique_id=699684990 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7196484, 1.5988011, -0.27661914)
+numeroDaCasa = "A17"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa21" parent="housevigili" unique_id=296643959 instance=ExtResource("2_b30p5")]
+[node name="placaDaCasa21" parent="housevigili" unique_id=296643959 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9319916, 1.3560413, -8.168251)
-numeroDaCasa = "A12"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa25" parent="housevigili" unique_id=366189482 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.470478, 2.810533, -5.285983)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa24" parent="housevigili" unique_id=711144717 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9012687, 1.8723347, -10.572117)
+[node name="placaDaCasa24" parent="housevigili" unique_id=711144717 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9012687, 1.6526421, -10.572117)
 numeroDaCasa = "C03"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa2" parent="housevigili" unique_id=1755261138 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.704803, 1.6630411, 4.802108)
-numeroDaCasa = "A12"
+[node name="placaDaCasa2" parent="housevigili" unique_id=1755261138 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.704803, 1.6093924, 4.802108)
+numeroDaCasa = "B15"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa8" parent="housevigili" unique_id=1704358262 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.704803, 2.7156427, 4.802108)
-numeroDaCasa = "A12"
+[node name="placaDaCasa3" parent="housevigili" unique_id=667572374 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8751, 1.5450286, 9.310729)
+numeroDaCasa = "C02"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa3" parent="housevigili" unique_id=667572374 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8751, 1.6630411, 9.310729)
-numeroDaCasa = "A12"
+[node name="placaDaCasa4" parent="housevigili" unique_id=1447250102 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.855954, 1.5936588, 11.261069)
+numeroDaCasa = "C04"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa7" parent="housevigili" unique_id=112183823 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8751, 2.6765983, 9.310729)
-numeroDaCasa = "A12"
+[node name="placaDaCasa9" parent="housevigili" unique_id=1077540861 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.9404421, 1.4441055, 13.885726)
+numeroDaCasa = "A13"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa4" parent="housevigili" unique_id=1447250102 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.855954, 1.6630411, 11.261069)
-numeroDaCasa = "A12"
+[node name="placaDaCasa10" parent="housevigili" unique_id=812957178 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.7681993, 1.4456375, 15.916617)
+numeroDaCasa = "B14"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa9" parent="housevigili" unique_id=1077540861 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.9404421, 1.6630411, 13.885726)
-numeroDaCasa = "A12"
+[node name="placaDaCasa14" parent="housevigili" unique_id=292517890 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.7577718, 1.4194549, 17.818985)
+numeroDaCasa = "A18"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa10" parent="housevigili" unique_id=812957178 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.7681993, 1.6630411, 15.916617)
-numeroDaCasa = "A12"
+[node name="placaDaCasa15" parent="housevigili" unique_id=535274240 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 3.6998844, 1.5463841, 19.252728)
+numeroDaCasa = "C01"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa11" parent="housevigili" unique_id=726635474 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.7577718, 2.6799743, 15.916617)
-numeroDaCasa = "A12"
+[node name="placaDaCasa18" parent="housevigili" unique_id=595800473 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 3.6297169, 1.5927176, 24.289745)
+numeroDaCasa = "B11"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa12" parent="housevigili" unique_id=1526101552 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.7577718, 2.6799743, 17.818985)
-numeroDaCasa = "A12"
+[node name="placaDaCasa19" parent="housevigili" unique_id=313270355 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 3.7806811, 1.582298, 28.01278)
+numeroDaCasa = "F12"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa13" parent="housevigili" unique_id=1157580151 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.7577718, 3.510301, 17.818985)
-numeroDaCasa = "A12"
+[node name="placaDaCasa27" parent="housevigili" unique_id=294568039 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.5791754, 27.541882)
+numeroDaCasa = "F17"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa14" parent="housevigili" unique_id=292517890 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 1.7577718, 1.6288927, 17.818985)
-numeroDaCasa = "A12"
+[node name="placaDaCasa28" parent="housevigili" unique_id=757192267 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.6349844, 25.082228)
+numeroDaCasa = "F15"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa15" parent="housevigili" unique_id=535274240 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 3.6998844, 1.6288927, 19.252728)
-numeroDaCasa = "A12"
+[node name="placaDaCasa29" parent="housevigili" unique_id=495884152 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.6349844, 23.685843)
+numeroDaCasa = "F03"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa16" parent="housevigili" unique_id=1891660604 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 3.6998844, 2.4849482, 20.51136)
-numeroDaCasa = "A12"
+[node name="placaDaCasa30" parent="housevigili" unique_id=1145797554 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.4566498, 21.133673)
+numeroDaCasa = "C00"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa18" parent="housevigili" unique_id=595800473 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 3.6297169, 1.6366403, 24.363583)
-numeroDaCasa = "A12"
+[node name="placaDaCasa31" parent="housevigili" unique_id=2046383236 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.573292, 16.73712)
+numeroDaCasa = "C12"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa19" parent="housevigili" unique_id=313270355 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, 3.7806811, 1.6366403, 27.939102)
-numeroDaCasa = "A12"
+[node name="placaDaCasa33" parent="housevigili" unique_id=1790803542 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.3638563, 1.9060377, 11.648533)
+numeroDaCasa = "A15"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa26" parent="housevigili" unique_id=366679186 instance=ExtResource("2_b30p5")]
-transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998952, 7.355983, 2.5603921, 27.697338)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa27" parent="housevigili" unique_id=294568039 instance=ExtResource("2_b30p5")]
-transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.6349844, 27.541882)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa28" parent="housevigili" unique_id=757192267 instance=ExtResource("2_b30p5")]
-transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.6349844, 25.124454)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa29" parent="housevigili" unique_id=495884152 instance=ExtResource("2_b30p5")]
-transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.6349844, 24.199102)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa30" parent="housevigili" unique_id=1145797554 instance=ExtResource("2_b30p5")]
-transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.7268836, 21.133673)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa31" parent="housevigili" unique_id=2046383236 instance=ExtResource("2_b30p5")]
-transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 1.7268836, 16.73712)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa32" parent="housevigili" unique_id=1962479038 instance=ExtResource("2_b30p5")]
-transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.355983, 2.672752, 16.73712)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa33" parent="housevigili" unique_id=1790803542 instance=ExtResource("2_b30p5")]
-transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.3638563, 2.1614017, 11.648533)
-numeroDaCasa = "A12"
-
-[node name="placaDaCasa34" parent="housevigili" unique_id=1380136865 instance=ExtResource("2_b30p5")]
+[node name="placaDaCasa34" parent="housevigili" unique_id=1380136865 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
 transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.3703437, 1.5886391, 7.286369)
-numeroDaCasa = "A12"
+numeroDaCasa = "B08"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa5" parent="housevigili" unique_id=1458159723 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.855954, 2.3852956, 11.261069)
-numeroDaCasa = "A12"
+[node name="placaDaCasa20" parent="housevigili" unique_id=1221895413 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 0.99992007, -0.012649879, 0, 0.012649879, 0.99992007, -2.5709732, 1.8196468, 26.102303)
+numeroDaCasa = "C06"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
-[node name="placaDaCasa6" parent="housevigili" unique_id=200669005 instance=ExtResource("2_b30p5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.855954, 3.4824214, 11.261069)
-numeroDaCasa = "A12"
+[node name="placaDaCasa35" parent="housevigili" unique_id=801279729 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 7.3703437, 1.6531285, 4.038747)
+numeroDaCasa = "A20"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="placaDaCasa5" parent="housevigili" unique_id=59881661 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5005455, 1.6630411, 4.9584093)
+numeroDaCasa = "B67"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="placaDaCasa36" parent="housevigili" unique_id=1788747091 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 11.788707, 1.6531285, 1.0500133)
+numeroDaCasa = "V12"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="placaDaCasa37" parent="housevigili" unique_id=2069400244 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99997497, 8.9397654e-05, 0.0070665083, 3.8783594e-11, 0.9999201, -0.012649882, -0.007067067, -0.012649565, -0.9998953, 11.511779, 1.6531285, -3.8497493)
+numeroDaCasa = "V17"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="placaDaCasa38" parent="housevigili" unique_id=2044950533 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.013958631, 0.0126486495, 0.99982285, 3.8783594e-11, 0.9999201, -0.012649882, -0.9999026, -0.00017657492, -0.0139575135, 10.504023, 1.5789455, 2.8860395)
+numeroDaCasa = "V15"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="placaDaCasa22" parent="housevigili" unique_id=566054537 node_paths=PackedStringArray("hud", "dialogos") instance=ExtResource("2_b30p5")]
+transform = Transform3D(-0.99999493, 0, -0.003194955, 0, 1, 0, 0.003194955, 0, -0.99999493, 7.402237, 1.738487, -9.248053)
+numeroDaCasa = "V03"
+hud = NodePath("../../CanvasLayer/hud")
+dialogos = NodePath("../../CanvasLayer/dialogos")
 
 [node name="Area3D" type="Area3D" parent="housevigili" unique_id=852798256]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="housevigili/Area3D" unique_id=460105941]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6127243, 1.231735, -3.8387313)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6127243, 1.231735, -3.6033561)
 shape = SubResource("SphereShape3D_g4v7s")
 
 [node name="Label3D" type="Label3D" parent="housevigili/Area3D" unique_id=1831450298]
-transform = Transform3D(0.46354526, 0, 0.8860733, 0, 1, 0, -0.8860733, 0, 0.46354526, -5.528352, 1.8650131, -3.6743808)
+transform = Transform3D(0.46354526, 0, 0.8860733, 0, 1, 0, -0.8860733, 0, 0.46354526, -5.2310123, 1.3159766, -3.6743808)
 visible = false
 billboard = 1
 text = "E"
@@ -178,9 +215,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 13.6653595, -10.731902)
 [node name="Marker3D" type="Marker3D" parent="player" unique_id=726124289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0284729, -0.12727833, -1.8017569)
 
-[node name="caroMO" parent="." unique_id=753883478 node_paths=PackedStringArray("door_point") instance=ExtResource("3_4fhxt")]
+[node name="caroMO" parent="." unique_id=753883478 node_paths=PackedStringArray("door_point", "dialogos") instance=ExtResource("3_4fhxt")]
 transform = Transform3D(-0.3014927, 0, 3.3866065, 0, 3.4, 0, -3.3866065, 0, -0.3014927, 18.862724, 2.0115256, 0)
 door_point = NodePath("Marker3D")
+dialogos = NodePath("../CanvasLayer/dialogos")
 
 [node name="Marker3D" type="Marker3D" parent="caroMO" unique_id=250413662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41922656, 0.20470524, -0.63403463)
@@ -188,6 +226,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41922656, 0.20470524, -0.63
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1101690922]
 
 [node name="hud" parent="CanvasLayer" unique_id=798942227 instance=ExtResource("5_5wwvk")]
+
+[node name="dialogos" type="CanvasLayer" parent="CanvasLayer" unique_id=1357046064 node_paths=PackedStringArray("hud")]
+script = ExtResource("7_l8342")
+hud = NodePath(".")
 
 [connection signal="body_entered" from="housevigili/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="housevigili/Area3D" to="." method="_on_area_3d_body_exited"]

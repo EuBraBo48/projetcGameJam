@@ -18,11 +18,20 @@ extends Node3D
 
 @export var distanciaPegarCaixaSemColisao: float = 3.0
 @export var toleranciaPegarCaixa: float = 0.8
+@export var input_label2: Label3D 
+
 
 @export var enderecosCaixas: Array[String] = [
-	"A12", "A17", "B15", "C03", "C03",
-	"C03", "A12", "B15", "A17", "C03", "B15"
+	"A12", "A17", "B15", "C03", "C02",
+	"C04", "A13", "B14", "A18", "C01", "B11",
+	"F12", "F17", "F15", "F03", "C00",
+	"C12", "A15", "B08", "A20", "C06", "B67",
+	"V12", "V17", "V15", "V03"
+
 ]
+
+var entregasCorretas: int = 0
+var enderecosEntregues: Array[String] = []
 
 var estaNaArea := false
 var caixaNaMao := false
@@ -45,7 +54,7 @@ func _ready() -> void:
 		push_error("ERRO: nó 'caixas' não encontrado!")
 		return
 
-	Gobla.atividadeDahora = "NAOPODEPEGACAIXA"
+	Gobla.atividadeDahora = "NAOPODEPEGARCAIXA"
 	caixasDisponiveis.clear()
 
 	var indice_caixa := 0
@@ -377,11 +386,15 @@ func registrar_caixa_devolvida(caixa: MeshInstance3D) -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		estaNaArea = true
+		if input_label2 and Gobla.atividadeDahora == "NAOPODEPEGARCAIXA":
+			input_label2.show()
 
 
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		estaNaArea = false
+		if input_label2:
+			input_label2.hide()
 
 
 func definir_escala_global(
@@ -402,3 +415,20 @@ func definir_escala_global(
 		escala_desejada.y / maxf(absf(escala_pai.y), 0.0001),
 		escala_desejada.z / maxf(absf(escala_pai.z), 0.0001)
 	)
+
+
+
+func registrar_entrega_correta(endereco: String) -> void:
+	entregasCorretas += 1
+	enderecosEntregues.append(endereco)
+
+	print(
+		"ENTREGAS CORRETAS: ",
+		entregasCorretas,
+		"/11"
+	)
+
+	if entregasCorretas >= 11:
+		Gobla.atividadeDahora = "CAIXASENTREGES"
+		print("PARABÉNS! TODAS AS 11 CAIXAS FORAM ENTREGUES!")
+		print("Objetivo atualizado: voltar para a agência!")

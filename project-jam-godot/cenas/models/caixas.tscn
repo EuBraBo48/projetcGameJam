@@ -535,11 +535,12 @@ data = PackedVector3Array(-1.0057, 0.49699998, 0.025899999, -0.98929995, 1.022, 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
 radius = 1.0
 
-[node name="caixas" type="Node3D" unique_id=139706443 node_paths=PackedStringArray("barraCarregamento", "label", "fundoDo")]
+[node name="caixas" type="Node3D" unique_id=139706443 node_paths=PackedStringArray("barraCarregamento", "label", "fundoDo", "input_label2")]
 script = ExtResource("1_328s5")
 barraCarregamento = NodePath("CanvasLayer/ProgressBar")
 label = NodePath("CanvasLayer/ColorRect/Label")
 fundoDo = NodePath("CanvasLayer/ColorRect")
+input_label2 = NodePath("Label3D")
 
 [node name="caixas" type="Node3D" parent="." unique_id=879215676 groups=["caixas_entregues"]]
 
@@ -671,6 +672,12 @@ offset_bottom = 121.0
 theme_override_font_sizes/font_size = 25
 text = "caixa: 01
 para a casa: A12"
+
+[node name="Label3D" type="Label3D" parent="." unique_id=790931484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37926257, 0.5662903)
+visible = false
+billboard = 1
+text = "Q"
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

@@ -9,6 +9,18 @@ extends Area3D
 @export var espacamentoX: float = 0.35
 @export var espacamentoY: float = 0.30
 @export var espacamentoZ: float = 0.35
+@export var caro_mo: CharacterBody3D 
+
+
+
+
+
+var DialogCOnCAIXAENt: Dictionary = {
+	0: {
+	"dialog": "PORRA! Ainda tem umas 40 caixas?! Que merda!",
+	"title": "Marcos",
+	}
+}
 
 @export var totalCaixasNecessarias: int = 11
 
@@ -43,6 +55,7 @@ func criar_recipiente() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
+	
 	if not body.is_in_group("caixas_soltas"):
 		return
 
@@ -66,6 +79,7 @@ func _on_body_entered(body: Node3D) -> void:
 	# DEPOIS DAS 11 ENTREGAS:
 	# Permite devolver caixas já entregues ao monte.
 	if entregaCompleta:
+		print("owowoeow")
 		var indice := caixasEntregues.find(mesh)
 
 		if indice >= 0:
@@ -116,7 +130,7 @@ func _on_body_entered(body: Node3D) -> void:
 	)
 
 	if caixasEntregues.size() >= totalCaixasNecessarias:
-		Gobla.atividadeDahora = "EntregaCaixa"
+		Gobla.atividadeDahora = "ENTRAGACAIXAS"
 		finalizar_entrega()
 
 
@@ -157,6 +171,7 @@ func finalizar_entrega() -> void:
 		caixa.set_meta("pode_ser_recolhida", true)
 
 	print("TODAS AS CAIXAS FORAM ENTREGUES!")
+	caro_mo.dialogos.dialogDiarioAbri(DialogCOnCAIXAENt)
 	print("Monte liberado permanentemente!")
 
 	# Avisa o sistema responsável por pegar e soltar caixas.

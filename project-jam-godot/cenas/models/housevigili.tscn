@@ -2061,41 +2061,6 @@ shadow_mesh = SubResource("ArrayMesh_ulhhs")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xbxnk"]
 data = PackedVector3Array(-7.2208, 0.021499999, 0.7091, -7.2208, 1.9111999, 0.709, -7.2208, 1.9113, -0.8138, -7.2208, 0.021499999, 0.7091, -7.2208, 1.9113, -0.8138, -7.2208, 0.021499999, -0.8138)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_g41uq"]
-_surfaces = [{
-"aabb": AABB(-9.441264, -2.1189458, -0.12310022, 2.466837, 1.4242306, 0.9392466),
-"format": 34896613377,
-"index_count": 6,
-"index_data": PackedByteArray("AAABAAIAAAACAAMA"),
-"name": "Empty.026",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray("AAAAAP//AAD+//////8AAP///v8AAAAAAAAAAAAAAAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_5rw6u"]
-resource_name = "housevigili_Object_54_010"
-_surfaces = [{
-"aabb": AABB(-9.441264, -2.1189458, -0.12310022, 2.466837, 1.4242306, 0.9392466),
-"attribute_data": PackedByteArray("gjOj9FySo/Rckm2HgjNthw=="),
-"format": 34896613399,
-"index_count": 6,
-"index_data": PackedByteArray("AAABAAIAAAACAAMA"),
-"material": SubResource("StandardMaterial3D_1eqrf"),
-"name": "Empty.026",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 4,
-"vertex_data": PackedByteArray("AAAAAP//RD3+//////9EPf///v8AAEQ9AAAAAAAARD1UFlZTVBZWU1QWVlNUFlZT")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_g41uq")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_8fsb5"]
-size = Vector3(2.466837, 1.4242306, 0.9392466)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pi4m4"]
 resource_name = "Empty.027"
 cull_mode = 2
@@ -14342,16 +14307,6 @@ mesh = SubResource("ArrayMesh_7010l")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/Empty_028_18/Object_76_006/StaticBody3D" unique_id=769766301]
 shape = SubResource("ConcavePolygonShape3D_xbxnk")
 
-[node name="Object_76_010" type="MeshInstance3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/Empty_028_18" unique_id=2027457457]
-transform = Transform3D(0.9881416, 0.26913983, 0, -0.15354566, 1.7320466, 0, 0, 0, 1, 0.5572429, -0.48443958, 0)
-mesh = SubResource("ArrayMesh_5rw6u")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/Empty_028_18/Object_76_010" unique_id=1105846078]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.207846, -1.4068305, 0.34652308)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/Empty_028_18/Object_76_010/StaticBody3D" unique_id=489863416]
-shape = SubResource("BoxShape3D_8fsb5")
-
 [node name="Object_77" type="MeshInstance3D" parent="Sketchfab_model/root/GLTF_SceneRootNode/Empty_028_18" unique_id=1235753414]
 mesh = SubResource("ArrayMesh_taoqi")
 
@@ -15684,7 +15639,7 @@ transform = Transform3D(1, 0, 0, 0, -3.5762787e-07, -0.99999994, 0, 0.99999994, 
 transform = Transform3D(1, 0, 0, 0, -3.5762787e-07, -0.99999994, 0, 0.99999994, -3.5762787e-07, 4.9011474, 0.7090608, 1.3922675)
 
 [node name="Object_81_011" type="MeshInstance3D" parent="Sketchfab_model_011/root_011/GLTF_SceneRootNode_011/Empty_028_18_011" unique_id=2074557066]
-transform = Transform3D(0.25133955, 2.2410731, 0, -1.3470308, 0.418157, 0, 0, 0, 1, -2.0343177, -13.658108, -0.16451868)
+transform = Transform3D(0.25133955, 2.2410731, 0, -1.3470308, 0.41815695, 0, 5.684342e-14, -1.4210855e-14, 0.9999999, -2.0343175, -14.333405, 0.114714146)
 mesh = SubResource("ArrayMesh_chowj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sketchfab_model_011/root_011/GLTF_SceneRootNode_011/Empty_028_18_011/Object_81_011" unique_id=1124675332]

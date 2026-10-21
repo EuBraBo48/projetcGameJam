@@ -26,6 +26,13 @@ script = ExtResource("2_unwft")
 transform = Transform3D(0.024422208, 0, 0.9928397, 0, 1, 0, -1.4022722, 0, 0.017291462, 0.018591285, -0.042876482, -0.056839228)
 target_position = Vector3(1, 0, 0)
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D" unique_id=996082733]
+light_color = Color(0.9999997, 0.9389409, 0.7308941, 1)
+light_energy = 0.647
+spot_range = 1.997
+spot_attenuation = 0.26
+spot_angle = 48.31043
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2087020867]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_yf5fn")

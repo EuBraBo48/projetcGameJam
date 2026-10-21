@@ -1,4 +1,5 @@
 extends Node
 
 
-var atividadeDahora: String = "PODEPEGACAIXA"
+
+var atividadeDahora: String = "PODEPEGARCAIXA"

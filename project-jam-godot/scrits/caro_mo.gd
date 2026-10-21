@@ -18,6 +18,7 @@ const CAMERA_SMOOTH = 10.0
 @export var camera_3d: Camera3D
 @export var animation_player: AnimationPlayer
 @export var door_point: Marker3D
+@export var dialogos: CanvasLayer 
 
 var porta_aberta: bool = false
 var with_player: bool = false

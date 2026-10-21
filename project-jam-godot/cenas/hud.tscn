@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://lnegiujtdiig" path="res://scrits/hud.gd" id="1_nkjil"]
 
-[node name="hud" type="Control" unique_id=798942227 node_paths=PackedStringArray("info")]
+[node name="hud" type="Control" unique_id=798942227 node_paths=PackedStringArray("info", "atividd", "hora", "menu_com_listagem")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,13 +11,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nkjil")
 info = NodePath("menu com listagem/info")
+atividd = NodePath("atividd")
+hora = NodePath("hora")
+menu_com_listagem = NodePath("menu com listagem")
 
 [node name="hora" type="Label" parent="." unique_id=484912107]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 25.0
-offset_right = 73.0
-offset_bottom = 48.0
+offset_left = 28.0
+offset_top = 11.0
+offset_right = 80.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
 text = "12:12"
 
 [node name="menu com listagem" type="Control" parent="." unique_id=2073115474]
@@ -38,20 +43,22 @@ layout_mode = 0
 offset_left = 621.0
 offset_top = 101.0
 offset_right = 836.0
-offset_bottom = 348.0
+offset_bottom = 492.0
 text = "E̶u̶f̶i̶z̶i̶s̶s̶o̶"
 
 [node name="imagan" type="ColorRect" parent="." unique_id=255230663]
 layout_mode = 0
-offset_left = 959.0
-offset_top = 556.0
-offset_right = 1052.0
-offset_bottom = 647.0
+offset_left = 1072.0
+offset_top = 570.0
+offset_right = 1144.0
+offset_bottom = 644.0
 
 [node name="atividd" type="Label" parent="." unique_id=858953246]
 layout_mode = 0
-offset_left = 1064.0
-offset_top = 20.0
-offset_right = 1136.0
-offset_bottom = 43.0
-text = "atividade"
+offset_left = 717.0
+offset_top = 11.0
+offset_right = 1145.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Entregar o máximo de caixas e sair vazado"

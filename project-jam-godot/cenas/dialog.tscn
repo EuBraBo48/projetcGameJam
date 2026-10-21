@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bk4w2b1paa3j8" path="res://scrits/dialog.gd" id="1_w71y7"]
 
-[node name="Dialog" type="Control" unique_id=1036318063]
+[node name="Dialog" type="Control" unique_id=1036318063 node_paths=PackedStringArray("_name", "_texte")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -11,10 +11,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w71y7")
+_name = NodePath("name")
+_texte = NodePath("dialog")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=523602451]
 layout_mode = 0
-offset_left = 30.0
+offset_left = 20.0
 offset_top = 468.0
 offset_right = 826.0
 offset_bottom = 612.0
@@ -46,9 +48,9 @@ anchor_left = 0.375
 anchor_top = 0.822
 anchor_right = 0.375
 anchor_bottom = 0.822
-offset_left = -398.0
+offset_left = -408.0
 offset_top = -43.656006
-offset_right = 389.0
+offset_right = 384.0
 offset_bottom = 74.343994
 grow_horizontal = 2
 grow_vertical = 2

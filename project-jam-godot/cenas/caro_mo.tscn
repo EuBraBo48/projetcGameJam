@@ -415,7 +415,7 @@ radius = 0.2944134
 radius = 0.27264723
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_57qmd"]
-radius = 0.2452815
+radius = 0.4260423
 
 [node name="caroMO" type="CharacterBody3D" unique_id=753883478 node_paths=PackedStringArray("input_label", "input_label2", "camera_3d", "animation_player")]
 script = ExtResource("1_hnf71")
@@ -470,13 +470,13 @@ shape = SubResource("BoxShape3D_d0u6y")
 
 [node name="inputLabel" type="Label3D" parent="." unique_id=1683602841]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460227, 0.49939686, -0.7233354)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33786416, 0.4593622, -0.6292621)
 billboard = 1
 text = "E"
 
 [node name="inputLabel2" type="Label3D" parent="." unique_id=606129497]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5721631, 0.6255514, -1.0120654)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6718528, 0.45554674, -1.0120654)
 billboard = 1
 text = "E"
 
@@ -501,15 +501,16 @@ transform = Transform3D(2.9692108e-08, -0.0859218, 0.9963019, 2.5606681e-09, 0.9
 transform = Transform3D(0.48289305, 0, 0, 0, 1, 0, 0, 0, 1, 1.549621, 0.40486082, -0.99435765)
 shape = SubResource("SphereShape3D_g4v7s")
 
-[node name="ondeACaixaEntra" type="Area3D" parent="." unique_id=342672376 node_paths=PackedStringArray("marcadorMonte")]
+[node name="ondeACaixaEntra" type="Area3D" parent="." unique_id=342672376 node_paths=PackedStringArray("marcadorMonte", "caro_mo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73987764, 0.3364646, -1)
 script = ExtResource("3_deg8h")
 marcadorMonte = NodePath("Marker3D")
 caixasPorColuna = 2
 caixasDeAltura = 3
+caro_mo = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ondeACaixaEntra" unique_id=955604123]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14045018, 0.03237629, -0.020279646)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.58298826, 0.14045018, 0.03237629, -0.020279646)
 shape = SubResource("SphereShape3D_57qmd")
 
 [node name="Marker3D" type="Marker3D" parent="ondeACaixaEntra" unique_id=469739895]

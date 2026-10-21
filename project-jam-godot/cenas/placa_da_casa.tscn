@@ -5,8 +5,7 @@
 [sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
 size = Vector3(0.001, 1, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_wbs2t"]
-radius = 1.4158221
+[sub_resource type="SphereShape3D" id="SphereShape3D_l8342"]
 
 [node name="placaDaCasa" type="Node3D" unique_id=699684990 node_paths=PackedStringArray("label_3d")]
 script = ExtResource("1_67k27")
@@ -23,7 +22,8 @@ text = "00"
 [node name="Area3D" type="Area3D" parent="." unique_id=1046763148]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1105535724]
-shape = SubResource("SphereShape3D_wbs2t")
+transform = Transform3D(1.0984107, 0, 0, 0, 2.385413, 0, 0, 0, 1.4092377, 0, 0, 0)
+shape = SubResource("SphereShape3D_l8342")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
