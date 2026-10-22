@@ -2,32 +2,13 @@
 extends Control
 
 var itens: Array[String] = [
-	"Casa A12",
-	"Casa A17",
-	"Casa B15",
-	"Casa C03",
-	"Casa C02",
-	"Casa C04",
-	"Casa A13",
-	"Casa B14",
-	"Casa A18",
-	"Casa C01",
-	"Casa B11",
-	"Casa F12",
-	"Casa F17",
-	"Casa F15",
-	"Casa F03",
-	"Casa C00",
-	"Casa C12",
-	"Casa A15",
-	"Casa B08",
-	"Casa A20",
-	"Casa C06",
-	"Casa B67",
-	"Casa V12",
-	"Casa V17",
-	"Casa V15",
-	"Casa V03"
+	"Casa A12", "Casa A17", "Casa B15", "Casa C03",
+	"Casa C02", "Casa C04", "Casa A13", "Casa B14",
+	"Casa A18", "Casa C01", "Casa B11", "Casa F12",
+	"Casa F17", "Casa F15", "Casa F03", "Casa C00",
+	"Casa C12", "Casa A15", "Casa B08", "Casa A20",
+	"Casa C06", "Casa B67", "Casa V12", "Casa V17",
+	"Casa V15", "Casa V03"
 ]
 
 var marcados: Array[int] = []
@@ -40,24 +21,28 @@ var marcados: Array[int] = []
 @export var dialogos: Node
 @export var npcs_para_sumir: Array[Node3D] = []
 @export var ambiente: WorldEnvironment
+@export var menu_morte: Control
+@export var imagan: ColorRect
+
+@export_group("Jumpscare")
 @export var jumpscare: PackedScene
+@export var marcador_susto: Marker3D
 
 var npcs_sumiram: bool = false
+var jumpscare_criado: bool = false
 
-var hora_jogo: int = 21
+var hora_jogo: int = 18
 var minuto_jogo: int = 0
 var tempo_acumulado: float = 0.0
 
 const SEGUNDOS_POR_HORA: float = 60.0
 
-# Contagem regressiva iniciada às 22:00
 var contagem_ativa: bool = false
 var segundos_restantes: int = 60
 var tempo_contagem: float = 0.0
 var contagem_finalizada: bool = false
 
 var dialogos_horarios_exibidos: Array[int] = []
-
 
 var DialogMarcos20: Dictionary = {
 	0: {
@@ -73,7 +58,6 @@ var DialogMarcos20: Dictionary = {
 		"dialog": "Tanto faz. Eu só preciso terminar o serviço, receber meu dinheiro e cair fora dessa Vila CP."
 	}
 }
-
 
 var DialogMarcos22: Dictionary = {
 	0: {
@@ -93,7 +77,6 @@ var DialogMarcos22: Dictionary = {
 		"dialog": "Mas que estranho... nem um carro passando. Bom, não é problema meu. Tenho caixas pra entregar."
 	}
 }
-
 
 var DialogMarcos00: Dictionary = {
 	0: {
@@ -116,6 +99,8 @@ var DialogMarcos00: Dictionary = {
 
 
 func _ready() -> void:
+	add_to_group("hud_entregas")
+
 	if is_instance_valid(menu_com_listagem):
 		menu_com_listagem.visible = false
 
@@ -131,11 +116,24 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("pause") and Gobla.atividadeDahora != "UTIMASHORA":
+		if $menu.visible:
+			get_tree().paused = false
+			$menu.hide()
+			imagan.show()
+			atividd.show()
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else:
+			get_tree().paused = true
+			$menu.show()
+			imagan.hide()
+			atividd.hide()
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 	if Input.is_action_just_pressed("listra"):
 		if is_instance_valid(menu_com_listagem):
 			menu_com_listagem.visible = not menu_com_listagem.visible
 
-	# Relógio normal do jogo
 	tempo_acumulado += delta
 
 	while tempo_acumulado >= SEGUNDOS_POR_HORA:
@@ -149,7 +147,6 @@ func _process(delta: float) -> void:
 		atualizar_hora()
 		verificar_dialogo_horario()
 
-	# Contagem regressiva: um segundo real por segundo
 	if contagem_ativa and not contagem_finalizada:
 		tempo_contagem += delta
 
@@ -165,136 +162,37 @@ func _process(delta: float) -> void:
 				if is_instance_valid(contagem_regressiva):
 					contagem_regressiva.text = "0"
 
-				if jumpscare != null:
-					var cena_susto = jumpscare.instantiate()
-					get_tree().root.add_child(cena_susto)
-
-					if cena_susto.has_method("iniciar_susto"):
-						cena_susto.iniciar_susto()
-				else:
-					push_warning("HUD: configure a cena Jumpscare no Inspector.")
-
+				criar_jumpscare()
 				break
 
 			atualizar_contagem()
 
-	# Atualiza o objetivo da HUD
 	if not is_instance_valid(atividd):
 		return
 
 	match Gobla.atividadeDahora:
 		"PODEPEGARCAIXA":
 			atividd.text = "Ir na agência da feira livre"
-
 		"NAOPODEPEGARCAIXA":
 			atividd.text = "Pegar as caixas e colocar no carro"
-
 		"ENTRAGACAIXAS":
 			atividd.text = "Entregar todas as caixas no seu devido lugar"
-
 		"CAIXASENTREGES":
 			atividd.text = "Voltar para a agência e pegar mais caixas"
-
 		"UTIMASHORA":
 			atividd.text = "Entregar o máximo de caixas e sair vazado"
 
 
-func atualizar_hora() -> void:
-	if is_instance_valid(hora):
-		hora.text = "%02d:%02d" % [hora_jogo, minuto_jogo]
+# Recebe os endereços da remessa atual.
+func definir_remessa(enderecos: Array[String]) -> void:
+	itens.clear()
+	marcados.clear()
 
+	for endereco in enderecos:
+		itens.append("Casa " + endereco)
 
-func verificar_dialogo_horario() -> void:
-	if hora_jogo == 22:
-		iniciar_ultima_hora()
-
-	if not is_instance_valid(dialogos):
-		push_warning("HUD: configure a variável 'dialogos'.")
-		return
-
-	match hora_jogo:
-		20:
-			chamar_dialogo_horario(20, DialogMarcos20)
-
-		22:
-			chamar_dialogo_horario(22, DialogMarcos22)
-
-		0:
-			chamar_dialogo_horario(0, DialogMarcos00)
-
-
-func iniciar_ultima_hora() -> void:
-	# Evita iniciar tudo novamente
-	if contagem_ativa or contagem_finalizada:
-		return
-
-	print("HUD: começou a última etapa!")
-
-	# Muda o objetivo global
-	Gobla.atividadeDahora = "UTIMASHORA"
-
-	# Faz todos os NPCs configurados desaparecerem
-	sumir_npcs()
-
-	# Esconde o relógio normal
-	if is_instance_valid(hora):
-		hora.hide()
-
-	# Mostra a contagem regressiva
-	segundos_restantes = 60
-	tempo_contagem = 0.0
-	contagem_ativa = true
-	contagem_finalizada = false
-
-	if is_instance_valid(contagem_regressiva):
-		contagem_regressiva.text = "60"
-		contagem_regressiva.show()
-
-	# Escurece a imagem do jogo
-	escurecer_ambiente()
-
-
-func atualizar_contagem() -> void:
-	if is_instance_valid(contagem_regressiva):
-		contagem_regressiva.text = str(segundos_restantes)
-
-
-func escurecer_ambiente() -> void:
-	if not is_instance_valid(ambiente):
-		push_warning("HUD: configure o WorldEnvironment na variável 'ambiente'.")
-		return
-
-	if not is_instance_valid(ambiente.environment):
-		push_warning("HUD: o WorldEnvironment não tem um Environment configurado.")
-		return
-
-	ambiente.environment.adjustment_enabled = true
-	ambiente.environment.adjustment_brightness = 0.55
-
-	print("HUD: o ambiente ficou mais escuro!")
-
-
-func sumir_npcs() -> void:
-	if npcs_sumiram:
-		return
-
-	npcs_sumiram = true
-
-	for npc in npcs_para_sumir:
-		if is_instance_valid(npc):
-			npc.call("sumir")
-
-	print("HUD: todos os NPCs desapareceram às 22:00!")
-
-
-func chamar_dialogo_horario(horario: int, nomeDoNegocio: Dictionary) -> void:
-	if dialogos_horarios_exibidos.has(horario):
-		return
-
-	dialogos_horarios_exibidos.append(horario)
-
-	if is_instance_valid(dialogos):
-		dialogos.call("dialogDiarioAbri", nomeDoNegocio)
+	_rebuild()
+	print("HUD: lista da remessa atualizada: ", itens.size(), " endereços")
 
 
 func registrar_entrega(endereco: String) -> void:
@@ -340,3 +238,146 @@ func _rebuild() -> void:
 			texto += itens[i]
 
 	info.text = texto
+
+
+func atualizar_hora() -> void:
+	if is_instance_valid(hora):
+		hora.text = "%02d:%02d" % [hora_jogo, minuto_jogo]
+
+
+func verificar_dialogo_horario() -> void:
+	if hora_jogo == 23:
+		iniciar_ultima_hora()
+
+	if not is_instance_valid(dialogos):
+		push_warning("HUD: configure a variável 'dialogos'.")
+		return
+
+	match hora_jogo:
+		19:
+			chamar_dialogo_horario(20, DialogMarcos20)
+		21:
+			chamar_dialogo_horario(22, DialogMarcos22)
+		23:
+			chamar_dialogo_horario(23, DialogMarcos00)
+
+
+func iniciar_ultima_hora() -> void:
+	if contagem_ativa or contagem_finalizada:
+		return
+
+	print("HUD: começou a última etapa!")
+	Gobla.atividadeDahora = "UTIMASHORA"
+
+	sumir_npcs()
+
+	if is_instance_valid(hora):
+		hora.hide()
+
+	segundos_restantes = 60
+	tempo_contagem = 0.0
+	contagem_ativa = true
+	contagem_finalizada = false
+
+	if is_instance_valid(contagem_regressiva):
+		contagem_regressiva.text = "60"
+		contagem_regressiva.show()
+
+	escurecer_ambiente()
+
+
+func atualizar_contagem() -> void:
+	if is_instance_valid(contagem_regressiva):
+		contagem_regressiva.text = str(segundos_restantes)
+
+
+func escurecer_ambiente() -> void:
+	if not is_instance_valid(ambiente):
+		push_warning("HUD: configure o WorldEnvironment na variável 'ambiente'.")
+		return
+
+	if not is_instance_valid(ambiente.environment):
+		push_warning("HUD: o WorldEnvironment não tem um Environment configurado.")
+		return
+
+	ambiente.environment.adjustment_enabled = true
+	ambiente.environment.adjustment_brightness = 0.55
+	print("HUD: o ambiente ficou mais escuro!")
+
+
+func sumir_npcs() -> void:
+	if npcs_sumiram:
+		return
+
+	npcs_sumiram = true
+
+	for npc in npcs_para_sumir:
+		if is_instance_valid(npc):
+			npc.call("sumir")
+
+	print("HUD: todos os NPCs desapareceram às 22:00!")
+
+
+func chamar_dialogo_horario(horario: int, nomeDoNegocio: Dictionary) -> void:
+	if dialogos_horarios_exibidos.has(horario):
+		return
+
+	dialogos_horarios_exibidos.append(horario)
+
+	if is_instance_valid(dialogos):
+		dialogos.call("dialogDiarioAbri", nomeDoNegocio)
+
+
+func criar_jumpscare() -> void:
+	if jumpscare_criado:
+		return
+
+	jumpscare_criado = true
+
+	if jumpscare == null:
+		push_warning("HUD: configure a cena Jumpscare no Inspector.")
+		return
+
+	if not is_instance_valid(marcador_susto):
+		push_warning("HUD: configure o Marker3D em 'marcador_susto'.")
+		return
+
+	var cena_susto := jumpscare.instantiate()
+
+	if not cena_susto is Node3D:
+		push_warning("HUD: a raiz da cena Jumpscare precisa ser Node3D.")
+		cena_susto.queue_free()
+		return
+
+	cena_susto.hud = self
+	get_tree().current_scene.add_child(cena_susto)
+	cena_susto.global_transform = marcador_susto.global_transform
+
+	if cena_susto.has_method("iniciar_susto"):
+		cena_susto.call_deferred("iniciar_susto")
+	else:
+		push_warning("HUD: a cena Jumpscare não tem iniciar_susto().")
+
+
+func _on_button_pressed() -> void:
+	get_tree().paused = false
+	$menu.hide()
+	imagan.show()
+	atividd.show()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _on_button_2_pressed() -> void:
+	get_tree().quit()
+
+
+func _on_mort_1_pressed() -> void:
+	get_tree().change_scene_to_file("res://cenas/main.tscn")
+	Gobla.atividadeDahora = "PODEPEGARCAIXA"
+	ambiente.environment.adjustment_enabled = true
+	ambiente.environment.adjustment_brightness = 1.0
+	Gobla.morreu = true
+
+
+func _on_mort_2_pressed() -> void:
+	get_tree().quit()

@@ -3,21 +3,67 @@
 [ext_resource type="Texture2D" uid="uid://b71nd5t8b7x17" path="res://models/lobo.png" id="1_5qrea"]
 [ext_resource type="Script" uid="uid://clpugv6mj4r76" path="res://scrits/jumpscren.gd" id="1_b2lfi"]
 
-[node name="jumpscren" type="Node3D" unique_id=93731405 node_paths=PackedStringArray("imagem_lobo", "flash", "som_susto")]
+[sub_resource type="Animation" id="Animation_b2lfi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.17225507, 0.879186, -0.05725211)]
+}
+
+[sub_resource type="Animation" id="Animation_g0c27"]
+resource_name = "anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.99),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.17225507, 0.879186, -0.05725211), Vector3(-0.17225507, 0.879186, -0.47327092)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7tm6m"]
+_data = {
+&"RESET": SubResource("Animation_b2lfi"),
+&"anim": SubResource("Animation_g0c27")
+}
+
+[node name="jumpscren" type="Node3D" unique_id=93731405 node_paths=PackedStringArray("imagem_lobo", "camera_susto", "animation_player", "som_susto", "flash")]
 script = ExtResource("1_b2lfi")
 imagem_lobo = NodePath("Sprite3D")
-flash = NodePath("CanvasLayer/ColorRect")
+camera_susto = NodePath("Camera3D")
+animation_player = NodePath("AnimationPlayer")
 som_susto = NodePath("AudioStreamPlayer")
+flash = NodePath("CanvasLayer/ColorRect")
+nome_animacao = &"anim"
+tempo_flash = null
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1212306379]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5985136, 3.172029, -3.3626876)
-billboard = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1841389, 0.91191006, -0.7086129)
+pixel_size = 0.001
 texture = ExtResource("1_5qrea")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=63064421]
 
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1584032290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17225507, 0.879186, -0.05725211)
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=273088697]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=177300508]
-offset_right = 840.0
-offset_bottom = 559.0
+offset_right = 1161.0
+offset_bottom = 638.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1468981794]
+libraries/ = SubResource("AnimationLibrary_7tm6m")

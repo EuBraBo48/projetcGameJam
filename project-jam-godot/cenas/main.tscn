@@ -268,11 +268,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41922656, 0.20470524, -0.63
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1101690922]
 
-[node name="hud" parent="CanvasLayer" unique_id=798942227 node_paths=PackedStringArray("dialogos", "npcs_para_sumir", "ambiente") instance=ExtResource("5_5wwvk")]
+[node name="hud" parent="CanvasLayer" unique_id=798942227 node_paths=PackedStringArray("dialogos", "npcs_para_sumir", "ambiente", "marcador_susto") instance=ExtResource("5_5wwvk")]
 dialogos = NodePath("../dialogos")
 npcs_para_sumir = [NodePath("../../npc/H1"), NodePath("../../npc/h2"), NodePath("../../npc/h3"), NodePath("../../npc/kid2"), NodePath("../../npc/kid"), NodePath("../../npc/M1"), NodePath("../../npc/M2"), NodePath("../../npc/M3")]
 ambiente = NodePath("../../WorldEnvironment")
 jumpscare = ExtResource("15_gl1un")
+marcador_susto = NodePath("Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="CanvasLayer/hud" unique_id=1114521971]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.59977, 3.5290818, 0.7607547)
 
 [node name="dialogos" type="CanvasLayer" parent="CanvasLayer" unique_id=1357046064 node_paths=PackedStringArray("hud")]
 script = ExtResource("7_l8342")

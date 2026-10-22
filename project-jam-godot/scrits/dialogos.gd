@@ -1,9 +1,11 @@
+
 extends CanvasLayer
 
-
 const DIALOG_SCREEEN: PackedScene = preload("res://cenas/dialog.tscn")
+
 @export_category("Objects")
 @export var hud: CanvasLayer = null
+
 var DialogChefeDia1: Dictionary = {
 	0: {
 		"dialog": "PORRA! Por que diabos eu tenho que trabalhar logo no Halloween? Que merda! Essa agência dos Correios só quer o mal do cara!",
@@ -18,7 +20,7 @@ var DialogChefeDia1: Dictionary = {
 		"title": "Marcos",
 	},
 	3: {
-		"dialog": "Tutorial: use WASD para se movimentar. Para entrar no carro, abrir a porta e pegar as caixas, aperte E. Não se preocupe, porque as missões estão logo ali, na parte de cima da tela.",
+		"dialog": "Tutorial: use WASD para se movimentar. Para entrar no carro, abrir a porta e pegar as caixas, aperte E. As missões estão na parte de cima da tela.",
 		"title": "Tutorial",
 	},
 	4: {
@@ -31,14 +33,42 @@ var DialogChefeDia1: Dictionary = {
 	}
 }
 
+
+# NOVO DIÁLOGO: quando Marcos morre
+var DialogMorte: Dictionary = {
+	0: {
+		"dialog": "Ah, não... Não, não, não! Que porra aconteceu comigo?!",
+		"title": "Marcos",
+	},
+	1: {
+		"dialog": "Eu só vim fazer umas entregas. Umas caixas! Era só isso que eu precisava fazer!",
+		"title": "Marcos",
+	},
+	2: {
+		"dialog": "Mas é claro... Tinha que ser logo no Halloween. Eu devia ter ficado em casa.",
+		"title": "Marcos",
+	},
+	3: {
+		"dialog": "Que lugar é esse? Por que parece que tem alguma coisa errada com essa cidade?",
+		"title": "Marcos",
+	},
+	4: {
+		"dialog": "Seja lá o que estiver acontecendo aqui... Eu preciso descobrir como sair de Vila CP.",
+		"title": "Marcos",
+	}
+}
+
+
 func _ready() -> void:
-	if Gobla.atividadeDahora == "PODEPEGARCAIXA":
+	if Gobla.morreu:
+		dialogDiarioAbri(DialogMorte)
+	else:
 		dialogDiarioAbri(DialogChefeDia1)
 
 
-
-func dialogDiarioAbri(nome) -> void:
+func dialogDiarioAbri(nome: Dictionary) -> void:
 	var dialog: DialogScren = DIALOG_SCREEEN.instantiate()
 	dialog.data = nome
+
 	get_tree().paused = true
 	hud.add_child(dialog)

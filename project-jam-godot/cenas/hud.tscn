@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://lnegiujtdiig" path="res://scrits/hud.gd" id="1_nkjil"]
 
-[node name="hud" type="Control" unique_id=798942227 node_paths=PackedStringArray("info", "atividd", "hora", "contagem_regressiva", "menu_com_listagem")]
+[node name="hud" type="Control" unique_id=798942227 node_paths=PackedStringArray("info", "atividd", "hora", "contagem_regressiva", "menu_com_listagem", "menu_morte", "imagan")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +16,8 @@ atividd = NodePath("atividd")
 hora = NodePath("hora")
 contagem_regressiva = NodePath("contagem")
 menu_com_listagem = NodePath("menu com listagem")
+menu_morte = NodePath("menuMORTE")
+imagan = NodePath("imagan")
 
 [node name="hora" type="Label" parent="." unique_id=484912107]
 layout_mode = 0
@@ -27,6 +30,7 @@ theme_override_font_sizes/font_size = 20
 text = "12:12"
 
 [node name="menu com listagem" type="Control" parent="." unique_id=2073115474]
+visible = false
 anchors_preset = 0
 offset_right = 1155.0
 offset_bottom = 650.0
@@ -72,3 +76,52 @@ offset_left = 296.0
 offset_top = 42.0
 offset_right = 336.0
 offset_bottom = 53.336
+
+[node name="menu" type="Control" parent="." unique_id=1427923858]
+visible = false
+anchors_preset = 0
+offset_right = 1155.0
+offset_bottom = 650.0
+
+[node name="Button" type="Button" parent="menu" unique_id=1450671282]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 280.0
+offset_right = 624.0
+offset_bottom = 323.0
+text = "volta"
+
+[node name="Button2" type="Button" parent="menu" unique_id=855673436]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 325.0
+offset_right = 624.0
+offset_bottom = 368.0
+text = "sair"
+
+[node name="menuMORTE" type="Control" parent="." unique_id=434522061]
+visible = false
+anchors_preset = 0
+offset_right = 1155.0
+offset_bottom = 650.0
+
+[node name="mort1" type="Button" parent="menuMORTE" unique_id=351407928]
+layout_mode = 0
+offset_left = 485.0
+offset_top = 280.0
+offset_right = 624.0
+offset_bottom = 323.0
+text = "renasce"
+
+[node name="mort2" type="Button" parent="menuMORTE" unique_id=747642334]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 325.0
+offset_right = 624.0
+offset_bottom = 368.0
+text = "sair"
+
+[connection signal="pressed" from="menu/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="menu/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="menuMORTE/mort1" to="." method="_on_mort_1_pressed"]
+[connection signal="pressed" from="menuMORTE/mort2" to="." method="_on_mort_2_pressed"]

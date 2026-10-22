@@ -104,7 +104,7 @@ func pegar_novas_caixas() -> void:
 		push_error("O nó de diálogos não foi configurado!")
 		return
 
-	# Escolhe o diálogo conforme as vezes que voltou à agência.
+	# Escolhe o diálogo da remessa.
 	if quantidadeDeVezes == 0:
 		dialogos.dialogDiarioAbri(DialogMarcosCaixas1)
 	elif quantidadeDeVezes == 1:
@@ -112,13 +112,25 @@ func pegar_novas_caixas() -> void:
 	else:
 		dialogos.dialogDiarioAbri(DialogMarcosCaixas3)
 
-	quantidadeDeVezes += 1
-
-	# Cria as caixas como no seu código original.
+	# Cria a nova remessa.
 	var caixa = CAIXAS.instantiate()
+
+	# Calcula os endereços desta remessa.
+	var inicio: int = quantidadeDeVezes * 11
+	var fim: int = mini(inicio + 11, caixa.enderecosCaixas.size())
+	var enderecos_remessa: Array[String] = []
+
+	for i in range(inicio, fim):
+		enderecos_remessa.append(caixa.enderecosCaixas[i])
+
+	# Define os endereços antes de adicionar a cena.
+	caixa.enderecosCaixas = enderecos_remessa
 	caixa.pontoCaixa = pontoDoPl
 	caixa.rayJogador = player.ray_cast_3d
+
 	ponto.add_child(caixa)
+
+	quantidadeDeVezes += 1
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:

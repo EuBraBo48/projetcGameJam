@@ -18,8 +18,7 @@ extends Node3D
 
 @export var distanciaPegarCaixaSemColisao: float = 3.0
 @export var toleranciaPegarCaixa: float = 0.8
-@export var input_label2: Label3D 
-
+@export var input_label2: Label3D
 
 @export var enderecosCaixas: Array[String] = [
 	"A12", "A17", "B15", "C03", "C02",
@@ -27,7 +26,6 @@ extends Node3D
 	"F12", "F17", "F15", "F03", "C00",
 	"C12", "A15", "B08", "A20", "C06", "B67",
 	"V12", "V17", "V15", "V03"
-
 ]
 
 var entregasCorretas: int = 0
@@ -41,7 +39,6 @@ var tempoSegurando := 0.0
 var caixasDisponiveis: Array[MeshInstance3D] = []
 var caixaAtual: MeshInstance3D = null
 
-# Libera o monte organizado somente depois das 11 entregas.
 var monteLiberado := false
 
 
@@ -65,22 +62,23 @@ func _ready() -> void:
 
 			caixasDisponiveis.append(caixa)
 			caixa.set_meta("transform_monte", caixa.transform)
-
-			caixa.set_meta(
-				"numero_caixa",
-				"%02d" % (indice_caixa + 1)
-			)
+			caixa.set_meta("numero_caixa", "%02d" % (indice_caixa + 1))
 
 			var endereco := "SEM DESTINO"
-
 			if indice_caixa < enderecosCaixas.size():
 				endereco = enderecosCaixas[indice_caixa]
 
 			caixa.set_meta("endereco_casa", endereco)
-
 			indice_caixa += 1
 
 	print("Caixas encontradas: ", caixasDisponiveis.size())
+
+	# Liga a lista desta remessa ao HUD.
+	var hud = get_tree().get_first_node_in_group("hud_entregas")
+	if hud != null:
+		hud.call("definir_remessa", enderecosCaixas)
+	else:
+		push_warning("Sistema de caixas: não encontrei o HUD no grupo hud_entregas.")
 
 	if barraCarregamento:
 		barraCarregamento.hide()
@@ -95,19 +93,16 @@ func _process(delta: float) -> void:
 			segurandoE = true
 			tempoSegurando = 0.0
 		else:
-			# 1. Tenta pegar uma caixa física solta.
 			var caixaSolta := detectar_caixa_solta()
 
 			if caixaSolta != null:
 				pegar_caixa_solta(caixaSolta)
 			else:
-				# 2. Tenta pegar uma caixa entregue SEM colisão.
 				var caixaOrganizada := detectar_caixa_entregue()
 
 				if caixaOrganizada != null:
 					pegar_caixa_entregue(caixaOrganizada)
 				elif estaNaArea:
-					# 3. Mantém a coleta do monte inicial.
 					pegar_caixa_monte()
 
 	if segurandoE and Input.is_action_pressed("pegar"):
@@ -134,13 +129,10 @@ func _process(delta: float) -> void:
 			soltar_caixa(false)
 
 
-# Chamado pela área quando as 11 caixas forem entregues.
 func liberar_caixas_entregues() -> void:
 	monteLiberado = true
-
 	set_meta("todas_caixas_entregues", true)
 	set_meta("liberar_entregas", true)
-
 	print("Coleta das caixas organizadas liberada!")
 
 
@@ -160,28 +152,20 @@ func detectar_caixa_entregue() -> MeshInstance3D:
 	var caixasDoMonte := get_tree().get_nodes_in_group("caixas_entregues")
 
 	for no in caixasDoMonte:
-		if not is_instance_valid(no):
-			continue
-
-		if not (no is MeshInstance3D):
+		if not is_instance_valid(no) or not (no is MeshInstance3D):
 			continue
 
 		var caixa := no as MeshInstance3D
 
-		# Só permite pegar as caixas depois de serem liberadas.
 		if not caixa.get_meta("pode_ser_recolhida", false):
 			continue
 
 		var deslocamento: Vector3 = caixa.global_position - origem
 		var distanciaFrente: float = deslocamento.dot(direcao)
 
-		if distanciaFrente <= 0.0:
+		if distanciaFrente <= 0.0 or distanciaFrente > distanciaPegarCaixaSemColisao:
 			continue
 
-		if distanciaFrente > distanciaPegarCaixaSemColisao:
-			continue
-
-		# Distância entre o centro da caixa e a direção da câmera.
 		var pontoMira: Vector3 = origem + direcao * distanciaFrente
 		var distanciaLateral: float = caixa.global_position.distance_to(pontoMira)
 
@@ -193,7 +177,8 @@ func detectar_caixa_entregue() -> MeshInstance3D:
 			melhorCaixa = caixa
 
 	return melhorCaixa
-# Pega uma caixa organizada sem criar colisão.
+
+
 func pegar_caixa_entregue(caixa: MeshInstance3D) -> void:
 	if not is_instance_valid(caixa):
 		return
@@ -203,7 +188,6 @@ func pegar_caixa_entregue(caixa: MeshInstance3D) -> void:
 		return
 
 	caixaAtual = caixa
-
 	caixa.remove_from_group("caixas_entregues")
 	caixa.set_meta("pode_ser_recolhida", false)
 
@@ -211,13 +195,9 @@ func pegar_caixa_entregue(caixa: MeshInstance3D) -> void:
 	caixa.transform = Transform3D.IDENTITY
 	caixa.rotation_degrees = rotacaoCaixa
 
-	definir_escala_global(
-		caixa,
-		Vector3.ONE * escalaNaMao
-	)
+	definir_escala_global(caixa, Vector3.ONE * escalaNaMao)
 
 	caixaNaMao = true
-
 	atualizar_label_caixa(caixa)
 
 	print(
@@ -241,24 +221,18 @@ func pegar_caixa_monte() -> void:
 	var caixa := caixasDisponiveis[indice]
 
 	caixasDisponiveis.remove_at(indice)
-
 	caixaAtual = caixa
 
 	caixa.reparent(pontoCaixa, false)
 	caixa.transform = Transform3D.IDENTITY
 	caixa.rotation_degrees = rotacaoCaixa
 
-	definir_escala_global(
-		caixa,
-		Vector3.ONE * escalaNaMao
-	)
+	definir_escala_global(caixa, Vector3.ONE * escalaNaMao)
 
 	caixaNaMao = true
-
 	atualizar_label_caixa(caixa)
 
 
-# Continua usando a colisão para encontrar caixas físicas soltas.
 func detectar_caixa_solta() -> RigidBody3D:
 	if rayJogador == null:
 		return null
@@ -295,20 +269,14 @@ func pegar_caixa_solta(corpo: RigidBody3D) -> void:
 		return
 
 	caixaAtual = mesh
-
 	mesh.reparent(pontoCaixa, false)
 	mesh.transform = Transform3D.IDENTITY
 	mesh.rotation_degrees = rotacaoCaixa
 
-	definir_escala_global(
-		mesh,
-		Vector3.ONE * escalaNaMao
-	)
+	definir_escala_global(mesh, Vector3.ONE * escalaNaMao)
 
 	corpo.queue_free()
-
 	caixaNaMao = true
-
 	atualizar_label_caixa(mesh)
 
 
@@ -352,13 +320,10 @@ func soltar_caixa(arremessar: bool) -> void:
 
 	definir_escala_global(caixa, escalaNoChao)
 
-	# A colisão existe somente na caixa solta.
 	var colisao := CollisionShape3D.new()
 	var forma := BoxShape3D.new()
-
 	forma.size = Vector3.ONE
 	colisao.shape = forma
-
 	corpo.add_child(colisao)
 
 	caixaAtual = null
@@ -386,6 +351,7 @@ func registrar_caixa_devolvida(caixa: MeshInstance3D) -> void:
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		estaNaArea = true
+
 		if input_label2 and Gobla.atividadeDahora == "NAOPODEPEGARCAIXA":
 			input_label2.show()
 
@@ -393,14 +359,12 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		estaNaArea = false
+
 		if input_label2:
 			input_label2.hide()
 
 
-func definir_escala_global(
-	no: Node3D,
-	escala_desejada: Vector3
-) -> void:
+func definir_escala_global(no: Node3D, escala_desejada: Vector3) -> void:
 	if no == null or not is_instance_valid(no):
 		return
 
@@ -417,16 +381,21 @@ func definir_escala_global(
 	)
 
 
-
 func registrar_entrega_correta(endereco: String) -> void:
 	entregasCorretas += 1
 	enderecosEntregues.append(endereco)
 
-	print(
-		"ENTREGAS CORRETAS: ",
-		entregasCorretas,
-		"/11"
-	)
+	# +10 pontos por entrega correta durante a última hora.
+	if Gobla.atividadeDahora == "UTIMASHORA":
+		Gobla.pontos += 10
+		print("PONTOS: ", Gobla.pontos)
+
+	# Marca a entrega no HUD.
+	var hud = get_tree().get_first_node_in_group("hud_entregas")
+	if hud != null:
+		hud.call("registrar_entrega", endereco)
+
+	print("ENTREGAS CORRETAS: ", entregasCorretas, "/11")
 
 	if entregasCorretas >= 11:
 		Gobla.atividadeDahora = "CAIXASENTREGES"
