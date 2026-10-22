@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://8jalhdvh57n"]
+
+[node name="loginha" type="Control" unique_id=1103721184]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1704287803]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 637.0
+color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=654897816]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 66.0
+offset_right = 679.0
+offset_bottom = 293.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=639310368]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 66.0
+offset_right = 679.0
+offset_bottom = 293.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=682983526]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 352.0
+offset_right = 674.0
+offset_bottom = 587.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1137884784]
+layout_mode = 0
+offset_left = 1061.0
+offset_top = 12.0
+offset_right = 1127.0
+offset_bottom = 35.0
+text = "dinheiro"

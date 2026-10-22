@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://lnegiujtdiig" path="res://scrits/hud.gd" id="1_nkjil"]
 
-[node name="hud" type="Control" unique_id=798942227 node_paths=PackedStringArray("info", "atividd", "hora", "menu_com_listagem")]
+[node name="hud" type="Control" unique_id=798942227 node_paths=PackedStringArray("info", "atividd", "hora", "contagem_regressiva", "menu_com_listagem")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +13,7 @@ script = ExtResource("1_nkjil")
 info = NodePath("menu com listagem/info")
 atividd = NodePath("atividd")
 hora = NodePath("hora")
+contagem_regressiva = NodePath("contagem")
 menu_com_listagem = NodePath("menu com listagem")
 
 [node name="hora" type="Label" parent="." unique_id=484912107]
@@ -62,3 +63,12 @@ offset_bottom = 39.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "Entregar o máximo de caixas e sair vazado"
+
+[node name="contagem" type="Label" parent="." unique_id=336480677]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.018000001
+offset_left = 296.0
+offset_top = 42.0
+offset_right = 336.0
+offset_bottom = 53.336

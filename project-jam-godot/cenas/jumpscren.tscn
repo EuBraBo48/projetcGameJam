@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cyqpg5p0uv6jm"]
+
+[ext_resource type="Texture2D" uid="uid://b71nd5t8b7x17" path="res://models/lobo.png" id="1_5qrea"]
+[ext_resource type="Script" uid="uid://clpugv6mj4r76" path="res://scrits/jumpscren.gd" id="1_b2lfi"]
+
+[node name="jumpscren" type="Node3D" unique_id=93731405 node_paths=PackedStringArray("imagem_lobo", "flash", "som_susto")]
+script = ExtResource("1_b2lfi")
+imagem_lobo = NodePath("Sprite3D")
+flash = NodePath("CanvasLayer/ColorRect")
+som_susto = NodePath("AudioStreamPlayer")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1212306379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5985136, 3.172029, -3.3626876)
+billboard = 1
+texture = ExtResource("1_5qrea")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=63064421]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=273088697]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=177300508]
+offset_right = 840.0
+offset_bottom = 559.0

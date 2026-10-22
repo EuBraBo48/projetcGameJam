@@ -5,8 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://tfeu8x4ujmow" path="res://cenas/player.tscn" id="2_4fhxt"]
 [ext_resource type="PackedScene" uid="uid://dwxpur60dq1ks" path="res://cenas/placa_da_casa.tscn" id="2_b30p5"]
 [ext_resource type="PackedScene" uid="uid://dkor4a1xw5hxo" path="res://cenas/caro_mo.tscn" id="3_4fhxt"]
+[ext_resource type="PackedScene" uid="uid://dcxw2gyuwrifn" path="res://cenas/models/per/h_1.tscn" id="4_v1d1r"]
+[ext_resource type="PackedScene" uid="uid://c416iir6jfomy" path="res://cenas/models/per/h_2.tscn" id="5_1yycb"]
 [ext_resource type="PackedScene" uid="uid://chk2ly7awk8p" path="res://cenas/hud.tscn" id="5_5wwvk"]
+[ext_resource type="PackedScene" uid="uid://qixcdlhr2xmt" path="res://cenas/models/per/h_3.tscn" id="6_jdavq"]
 [ext_resource type="Script" uid="uid://bn8ihg1tuqhe8" path="res://scrits/dialogos.gd" id="7_l8342"]
+[ext_resource type="PackedScene" uid="uid://dcgoaggyuq814" path="res://cenas/models/per/kid_2.tscn" id="7_vhipe"]
+[ext_resource type="PackedScene" uid="uid://ci6q13eyrm4b7" path="res://cenas/models/per/kid.tscn" id="8_iwfo7"]
+[ext_resource type="PackedScene" uid="uid://bfoypr7b6af7j" path="res://cenas/models/per/m_1.tscn" id="9_g6klm"]
+[ext_resource type="PackedScene" uid="uid://bgjinunann6if" path="res://cenas/models/per/m_2.tscn" id="10_ocpn0"]
+[ext_resource type="PackedScene" uid="uid://g54d6ya4dkcj" path="res://cenas/models/per/m_3.tscn" id="11_gl1un"]
+[ext_resource type="PackedScene" uid="uid://cyqpg5p0uv6jm" path="res://cenas/jumpscren.tscn" id="15_gl1un"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bhvw8"]
 sky_top_color = Color(0.3581875, 0.36431646, 0.20866138, 1)
@@ -209,6 +218,40 @@ text = "E"
 [node name="Marker3D" type="Marker3D" parent="housevigili" unique_id=2007448168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6466327, 0.8318367, -4.9506235)
 
+[node name="npc" type="Node3D" parent="." unique_id=787910607]
+
+[node name="H1" parent="npc" unique_id=656443341 node_paths=PackedStringArray("dialogos") instance=ExtResource("4_v1d1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.054613, 2.2728705, 0)
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="h2" parent="npc" unique_id=2046481105 node_paths=PackedStringArray("dialogos") instance=ExtResource("5_1yycb")]
+transform = Transform3D(-0.933806, 0, -0.35778004, 0, 1, 0, 0.35778004, 0, -0.933806, 25.091738, 2.2871788, 1.2420361)
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="h3" parent="npc" unique_id=169625627 node_paths=PackedStringArray("dialogos") instance=ExtResource("6_jdavq")]
+transform = Transform3D(-0.26370084, 0, 0.96460456, 0, 1, 0, -0.96460456, 0, -0.26370084, 12.531136, 2.2537208, 10.233555)
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="kid2" parent="npc" unique_id=2073379190 node_paths=PackedStringArray("dialogos") instance=ExtResource("7_vhipe")]
+transform = Transform3D(0.37883213, 0, -0.9254654, 0, 1, 0, 0.9254654, 0, 0.37883213, 24.092215, 2.3347602, -15.123426)
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="kid" parent="npc" unique_id=2080377970 node_paths=PackedStringArray("dialogos") instance=ExtResource("8_iwfo7")]
+transform = Transform3D(0.039203923, 0, 0.9992312, 0, 1, 0, -0.9992312, 0, 0.039203923, 26.261599, 2.295456, -16.569288)
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="M1" parent="npc" unique_id=2069760205 node_paths=PackedStringArray("dialogos") instance=ExtResource("9_g6klm")]
+transform = Transform3D(0.409166, 0, -0.91245997, 0, 1, 0, 0.91245997, 0, 0.409166, 13.727369, 2.328068, 9.7283535)
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="M2" parent="npc" unique_id=737044476 node_paths=PackedStringArray("dialogos") instance=ExtResource("10_ocpn0")]
+transform = Transform3D(0.32120875, 0, -0.94700843, 0, 1, 0, 0.94700843, 0, 0.32120875, 33.89752, 2.438171, -5.452133)
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
+[node name="M3" parent="npc" unique_id=968369420 node_paths=PackedStringArray("dialogos") instance=ExtResource("11_gl1un")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.47494, 2.32588, -5.0515957)
+dialogos = NodePath("../../CanvasLayer/dialogos")
+
 [node name="player" parent="." unique_id=1142826060 instance=ExtResource("2_4fhxt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 13.6653595, -10.731902)
 
@@ -225,7 +268,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41922656, 0.20470524, -0.63
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1101690922]
 
-[node name="hud" parent="CanvasLayer" unique_id=798942227 instance=ExtResource("5_5wwvk")]
+[node name="hud" parent="CanvasLayer" unique_id=798942227 node_paths=PackedStringArray("dialogos", "npcs_para_sumir", "ambiente") instance=ExtResource("5_5wwvk")]
+dialogos = NodePath("../dialogos")
+npcs_para_sumir = [NodePath("../../npc/H1"), NodePath("../../npc/h2"), NodePath("../../npc/h3"), NodePath("../../npc/kid2"), NodePath("../../npc/kid"), NodePath("../../npc/M1"), NodePath("../../npc/M2"), NodePath("../../npc/M3")]
+ambiente = NodePath("../../WorldEnvironment")
+jumpscare = ExtResource("15_gl1un")
 
 [node name="dialogos" type="CanvasLayer" parent="CanvasLayer" unique_id=1357046064 node_paths=PackedStringArray("hud")]
 script = ExtResource("7_l8342")
