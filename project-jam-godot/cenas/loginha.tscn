@@ -1,5 +1,17 @@
 [gd_scene format=3 uid="uid://8jalhdvh57n"]
 
+[ext_resource type="Texture2D" uid="uid://bus0malxjw3rk" path="res://models/FTS/m1.png" id="1_jj0w3"]
+[ext_resource type="Texture2D" uid="uid://cf27skqwy5ge1" path="res://models/FTS/m2.png" id="2_xhi53"]
+[ext_resource type="Texture2D" uid="uid://cgllrc3uuv5je" path="res://models/FTS/m3.png" id="3_bbhwa"]
+[ext_resource type="Texture2D" uid="uid://62yjb22vw1k" path="res://models/FTS/m4.png" id="4_f4sf6"]
+[ext_resource type="Texture2D" uid="uid://cmea7grbb3tvc" path="res://models/FTS/m5.png" id="5_tfrg6"]
+[ext_resource type="Texture2D" uid="uid://dsrbh0bshpf3e" path="res://models/FTS/p2.png" id="6_q0vx0"]
+[ext_resource type="Script" uid="uid://upskncdigvm0" path="res://scrits/scroll_container.gd" id="6_xhi53"]
+[ext_resource type="Texture2D" uid="uid://dlk0tdcuqymuf" path="res://models/FTS/p1.png" id="7_twa6c"]
+[ext_resource type="Texture2D" uid="uid://17y3owxlc484" path="res://models/FTS/p3.png" id="8_q0s3a"]
+[ext_resource type="Texture2D" uid="uid://cvpgh812nhxse" path="res://models/FTS/p4.png" id="9_qtv0k"]
+[ext_resource type="Texture2D" uid="uid://c3naf707oytjk" path="res://models/FTS/p5.png" id="10_oa2q0"]
+
 [node name="loginha" type="Control" unique_id=1103721184]
 layout_mode = 3
 anchors_preset = 15
@@ -8,13 +20,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1704287803]
+[node name="principal" type="Control" parent="." unique_id=48647866]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="fundo" type="ColorRect" parent="principal" unique_id=1704287803]
 layout_mode = 0
 offset_right = 1155.0
 offset_bottom = 637.0
 color = Color(0.3403393, 0.34033933, 0.3403393, 1)
+metadata/_edit_lock_ = true
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=654897816]
+[node name="fundoDaVitrine1" type="ColorRect" parent="principal" unique_id=654897816]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 66.0
@@ -22,15 +40,7 @@ offset_right = 679.0
 offset_bottom = 293.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect4" type="ColorRect" parent="." unique_id=639310368]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 66.0
-offset_right = 679.0
-offset_bottom = 293.0
-color = Color(0, 0, 0, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="." unique_id=682983526]
+[node name="fundoDaVitrine2" type="ColorRect" parent="principal" unique_id=682983526]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 352.0
@@ -38,10 +48,167 @@ offset_right = 674.0
 offset_bottom = 587.0
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="." unique_id=1137884784]
+[node name="pontos" type="Label" parent="principal" unique_id=1137884784]
 layout_mode = 0
-offset_left = 1061.0
-offset_top = 12.0
-offset_right = 1127.0
-offset_bottom = 35.0
-text = "dinheiro"
+offset_left = 953.0
+offset_top = 9.0
+offset_right = 1046.0
+offset_bottom = 32.0
+text = "PONTOS: 00"
+
+[node name="titulo" type="Label" parent="principal" unique_id=1754411259]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 10.0
+offset_right = 201.0
+offset_bottom = 33.0
+text = "LOJINHA DO BRABINHO"
+
+[node name="tituloDoP" type="Label" parent="principal" unique_id=1014867614]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 65.0
+offset_right = 170.0
+offset_bottom = 88.0
+text = "Pets"
+
+[node name="tituloDoM" type="Label" parent="principal" unique_id=520596595]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 361.0
+offset_right = 166.0
+offset_bottom = 384.0
+text = "player"
+
+[node name="vitrine" type="Control" parent="." unique_id=1698455163]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="vitrine" unique_id=1066570914 node_paths=PackedStringArray("area_sprites")]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 352.0
+offset_right = 655.0
+offset_bottom = 580.0
+script = ExtResource("6_xhi53")
+area_sprites = NodePath("Control")
+
+[node name="Control" type="Control" parent="vitrine/ScrollContainer2" unique_id=1444909354]
+layout_mode = 2
+
+[node name="M1" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=780097763]
+position = Vector2(114.000015, 146)
+scale = Vector2(0.2755611, 0.39087757)
+texture = ExtResource("1_jj0w3")
+
+[node name="M2" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=2107209281]
+position = Vector2(366, 139)
+scale = Vector2(0.31329075, 0.39087757)
+texture = ExtResource("2_xhi53")
+
+[node name="M3" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=1020322539]
+position = Vector2(613, 135.99994)
+scale = Vector2(0.2904326, 0.39087757)
+texture = ExtResource("3_bbhwa")
+
+[node name="M4" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=1576351682]
+position = Vector2(808, 147)
+scale = Vector2(0.2755611, 0.39087757)
+texture = ExtResource("4_f4sf6")
+
+[node name="M5" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=1723676546]
+position = Vector2(1069, 125.99997)
+scale = Vector2(0.2755611, 0.39087757)
+texture = ExtResource("5_tfrg6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="vitrine" unique_id=2080390749 node_paths=PackedStringArray("area_sprites")]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 70.0
+offset_right = 666.0
+offset_bottom = 293.0
+mouse_filter = 0
+script = ExtResource("6_xhi53")
+area_sprites = NodePath("HBoxContainer")
+
+[node name="HBoxContainer" type="Control" parent="vitrine/ScrollContainer" unique_id=540231075]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="P1" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=602189723]
+position = Vector2(116.28125, 121.718735)
+scale = Vector2(0.5332584, 0.5471214)
+texture = ExtResource("6_q0vx0")
+
+[node name="Button" type="Button" parent="vitrine/ScrollContainer/HBoxContainer/P1" unique_id=869015018]
+offset_left = -197.4301
+offset_top = -154.84448
+offset_right = 198.25053
+offset_bottom = 155.87268
+
+[node name="P2" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=296345257]
+position = Vector2(348.00003, 116.999985)
+scale = Vector2(0.32344738, 0.40158)
+texture = ExtResource("7_twa6c")
+
+[node name="P3" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=906975924]
+position = Vector2(572.08746, 116.968735)
+scale = Vector2(0.47396547, 0.47108462)
+texture = ExtResource("8_q0s3a")
+
+[node name="P4" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=1957560330]
+position = Vector2(790, 120)
+scale = Vector2(0.41933575, 0.60943407)
+texture = ExtResource("9_qtv0k")
+
+[node name="P5" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=150609601]
+position = Vector2(982, 123)
+scale = Vector2(0.3074458, 0.36752132)
+texture = ExtResource("10_oa2q0")
+
+[node name="fundoDaCompra" type="ColorRect" parent="." unique_id=1120981697]
+visible = false
+layout_mode = 0
+offset_left = 94.0
+offset_top = 49.0
+offset_right = 794.0
+offset_bottom = 400.0
+color = Color(0.50140655, 0.5014065, 0.5014065, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="fundoDaCompra" unique_id=1151884453]
+position = Vector2(146, 113)
+scale = Vector2(0.32954544, 0.3768116)
+texture = ExtResource("7_twa6c")
+
+[node name="name" type="Label" parent="fundoDaCompra" unique_id=1061752941]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 2.0
+offset_right = 57.0
+offset_bottom = 25.0
+text = "nome"
+
+[node name="descrição" type="Label" parent="fundoDaCompra" unique_id=1551861823]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 220.0
+offset_right = 497.0
+offset_bottom = 343.0
+text = "OQUE ELE FAZ DESCRIÇÂO"
+
+[node name="compra" type="Button" parent="fundoDaCompra" unique_id=775246461]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 70.0
+offset_right = 483.0
+offset_bottom = 135.0
+text = "COMPRA"
+
+[node name="ponto" type="Label" parent="fundoDaCompra" unique_id=1081113984]
+layout_mode = 0
+offset_left = 626.0
+offset_top = 19.0
+offset_right = 672.0
+offset_bottom = 42.0
+text = "Ponto"
