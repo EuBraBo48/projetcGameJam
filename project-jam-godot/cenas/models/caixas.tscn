@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dnccwyyekymnd" path="res://scrits/caixas.gd" id="1_328s5"]
 [ext_resource type="Texture2D" uid="uid://bqa24y4353tyg" path="res://models/obj/caixas_Image_0.png" id="1_ve75v"]
 [ext_resource type="Texture2D" uid="uid://cwalnm846wtqk" path="res://models/obj/caixas_Image_1.png" id="2_328s5"]
+[ext_resource type="Texture2D" uid="uid://dqgqlv4m2wtoh" path="res://models/FTS/fundoDialogCA.png" id="4_6wv2h"]
+[ext_resource type="FontFile" uid="uid://usbeqmbt7b8v" path="res://Xolonium-Regular.ttf" id="5_dbxng"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yupae"]
 resource_name = "Material.011"
@@ -538,8 +540,8 @@ radius = 1.0
 [node name="caixas" type="Node3D" unique_id=139706443 node_paths=PackedStringArray("barraCarregamento", "label", "fundoDo", "input_label2")]
 script = ExtResource("1_328s5")
 barraCarregamento = NodePath("CanvasLayer/ProgressBar")
-label = NodePath("CanvasLayer/ColorRect/Label")
-fundoDo = NodePath("CanvasLayer/ColorRect")
+label = NodePath("CanvasLayer/Label")
+fundoDo = NodePath("CanvasLayer/FundoDialogCa")
 input_label2 = NodePath("Label3D")
 
 [node name="caixas" type="Node3D" parent="." unique_id=879215676 groups=["caixas_entregues"]]
@@ -656,20 +658,19 @@ offset_top = 593.0
 offset_right = 647.0
 offset_bottom = 620.0
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=647285356]
-offset_left = 23.0
-offset_top = 525.0
-offset_right = 314.0
-offset_bottom = 650.0
-color = Color(0.096204735, 0.09620475, 0.096204735, 1)
+[node name="FundoDialogCa" type="Sprite2D" parent="CanvasLayer" unique_id=1659869916]
+position = Vector2(135.5, 541)
+scale = Vector2(4.609375, 4.0625005)
+texture = ExtResource("4_6wv2h")
 
-[node name="Label" type="Label" parent="CanvasLayer/ColorRect" unique_id=310067848]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 1.0
-offset_right = 289.0
-offset_bottom = 121.0
-theme_override_font_sizes/font_size = 25
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=310067848]
+offset_left = 28.0
+offset_top = 532.0
+offset_right = 251.0
+offset_bottom = 652.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_dbxng")
+theme_override_font_sizes/font_size = 22
 text = "caixa: 01
 para a casa: A12"
 

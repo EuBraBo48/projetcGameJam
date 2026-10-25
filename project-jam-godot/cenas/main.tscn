@@ -16,9 +16,17 @@
 [ext_resource type="PackedScene" uid="uid://bgjinunann6if" path="res://cenas/models/per/m_2.tscn" id="10_ocpn0"]
 [ext_resource type="PackedScene" uid="uid://g54d6ya4dkcj" path="res://cenas/models/per/m_3.tscn" id="11_gl1un"]
 [ext_resource type="PackedScene" uid="uid://cyqpg5p0uv6jm" path="res://cenas/jumpscren.tscn" id="15_gl1un"]
+[ext_resource type="PackedScene" uid="uid://8jalhdvh57n" path="res://cenas/loginha.tscn" id="17_dfnyg"]
+[ext_resource type="PackedScene" uid="uid://c1ee3sto37sig" path="res://cenas/models/pets/bixi_azuk.tscn" id="18_03f8d"]
+[ext_resource type="PackedScene" uid="uid://cf8dyehlyxyag" path="res://cenas/models/pets/petgato.tscn" id="19_em6j3"]
+[ext_resource type="PackedScene" uid="uid://cjxewlo5sapqi" path="res://cenas/models/pets/pet_chacoco.tscn" id="20_7lu6d"]
+[ext_resource type="PackedScene" uid="uid://cwiy7c0gjkri7" path="res://cenas/models/pets/pet_pedra.tscn" id="21_71ex4"]
+[ext_resource type="PackedScene" uid="uid://bpierqfihs8dk" path="res://cenas/models/pets/robozinho.tscn" id="22_ostd4"]
+[ext_resource type="AudioStream" uid="uid://cjf57ewt7xytg" path="res://sons/nastelbom-halloween-halloween-horror-616999.wav" id="23_em6j3"]
+[ext_resource type="AudioStream" uid="uid://bsk10qkdps38l" path="res://sons/leberch-most-fear-horror-609123.wav" id="24_7lu6d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bhvw8"]
-sky_top_color = Color(0.3581875, 0.36431646, 0.20866138, 1)
+sky_top_color = Color(0.26357168, 0.26965648, 0.14633334, 1)
 sky_horizon_color = Color(0.18923894, 0.1892201, 0.16588119, 1)
 ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
@@ -30,18 +38,28 @@ sky_material = SubResource("ProceduralSkyMaterial_bhvw8")
 background_mode = 2
 sky = SubResource("Sky_l8342")
 fog_enabled = true
-fog_light_energy = 0.39
+fog_light_energy = 0.91
+fog_density = 0.008
+fog_aerial_perspective = 0.123
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
 radius = 1.9571645
 
-[node name="main" type="Node3D" unique_id=1322923223 node_paths=PackedStringArray("input_label2", "ponto", "pontoDoPl", "player", "dialogos")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_yf5fn"]
+radius = 2.6073668
+
+[node name="main" type="Node3D" unique_id=1322923223 node_paths=PackedStringArray("input_label2", "ponto", "pontoDoPl", "player", "dialogos", "p_1", "p_2", "p_3", "p_4", "p_5")]
 script = ExtResource("1_bhvw8")
 input_label2 = NodePath("housevigili/Area3D/Label3D")
 ponto = NodePath("housevigili/Marker3D")
 pontoDoPl = NodePath("player/Marker3D")
 player = NodePath("player")
 dialogos = NodePath("CanvasLayer/dialogos")
+p_1 = NodePath("pets/bixiAzuk")
+p_2 = NodePath("pets/petgato")
+p_3 = NodePath("pets/PetChacoco")
+p_4 = NodePath("pets/PetPedra")
+p_5 = NodePath("pets/robozinho")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2082205955]
 environment = SubResource("Environment_v1d1r")
@@ -253,13 +271,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.47494, 2.32588, -5.0515957
 dialogos = NodePath("../../CanvasLayer/dialogos")
 
 [node name="player" parent="." unique_id=1142826060 instance=ExtResource("2_4fhxt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 13.6653595, -10.731902)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.748081, 3.0909944, -31.569613)
 
 [node name="Marker3D" type="Marker3D" parent="player" unique_id=726124289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0284729, -0.12727833, -1.8017569)
 
 [node name="caroMO" parent="." unique_id=753883478 node_paths=PackedStringArray("door_point", "dialogos") instance=ExtResource("3_4fhxt")]
-transform = Transform3D(-0.3014927, 0, 3.3866065, 0, 3.4, 0, -3.3866065, 0, -0.3014927, 18.862724, 2.0115256, 0)
+transform = Transform3D(-0.3014927, 0, 3.3866065, 0, 3.4, 0, -3.3866065, 0, -0.3014927, 18.862724, 2.0115256, -25.007242)
 door_point = NodePath("Marker3D")
 dialogos = NodePath("../CanvasLayer/dialogos")
 
@@ -282,5 +300,83 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.59977, 3.5290818, 0.760754
 script = ExtResource("7_l8342")
 hud = NodePath(".")
 
+[node name="loginha" parent="CanvasLayer" unique_id=1103721184 node_paths=PackedStringArray("player", "main") instance=ExtResource("17_dfnyg")]
+visible = false
+player = NodePath("../../player")
+main = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=267275073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.11729, 3.3050652, -34.32436)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=385311916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59220505, -1.3279419)
+shape = SubResource("SphereShape3D_yf5fn")
+
+[node name="pets" type="Node3D" parent="." unique_id=1384195275]
+
+[node name="bixiAzuk" parent="pets" unique_id=231145808 instance=ExtResource("18_03f8d")]
+transform = Transform3D(-13.526607, 0, -26.777433, 0, 29.999998, 0, 26.777433, 0, -13.526607, 27.728012, 2.4998772, 6.0927243)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="pets/bixiAzuk" unique_id=1793474560]
+transform = Transform3D(0.027032688, -0.014992446, -0.0124728335, 0.01499245, 0.0023413314, 0.029679218, -0.012472829, -0.029679216, 0.008641979, -0.017088309, 0.03573539, 0.0007734895)
+light_color = Color(1, 0.69803923, 1, 1)
+light_energy = 3.028
+spot_range = 1.7374696
+
+[node name="petgato" parent="pets" unique_id=2136212217 instance=ExtResource("19_em6j3")]
+transform = Transform3D(36.180576, 0, -17.057722, 0, 40, 0, 17.057722, 0, 36.180576, -7.573575, 2.3788855, -14.34745)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="pets/petgato" unique_id=716594898]
+transform = Transform3D(0.020274518, -0.011244333, -0.009354621, 0.011244334, 0.0017559998, 0.022259412, -0.009354622, -0.022259412, 0.0064814836, -0.014049858, 0.018566389, -0.001913026)
+light_color = Color(1, 0.69803923, 1, 1)
+light_energy = 3.028
+spot_range = 1.7374696
+
+[node name="PetChacoco" parent="pets" unique_id=583854688 instance=ExtResource("20_7lu6d")]
+transform = Transform3D(103.79031, 0, -108.29388, 0, 149.99998, 0, 108.29388, 0, 103.79031, 29.99962, 2.3949077, -16.369686)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="pets/PetChacoco" unique_id=1480977858]
+transform = Transform3D(0.0059108646, -0.0029924184, -0.0007426827, 0.0006173093, -0.00042474427, 0.006624423, -0.0030207739, -0.0059421784, -9.9503755e-05, -0.00053135306, 0.012157457, -0.00069077313)
+light_color = Color(1, 0.69803923, 1, 1)
+light_energy = 3.028
+spot_range = 1.7374696
+
+[node name="PetPedra" parent="pets" unique_id=1758669126 instance=ExtResource("21_71ex4")]
+transform = Transform3D(0.030299371, 0, -1.9997705, 0, 2, 0, 1.9997705, 0, 0.030299371, -1.0848141, 2.4998772, -15.347025)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="pets/PetPedra" unique_id=1185866069]
+transform = Transform3D(0.40549034, -0.22488667, -0.18709248, 0.22488673, 0.035119988, 0.44518822, -0.18709242, -0.44518825, 0.1296297, 0.050813675, 0.70376134, 0.0018022954)
+light_color = Color(1, 0.69803923, 1, 1)
+light_energy = 3.028
+spot_range = 2.7322555
+spot_angle = 67.5
+
+[node name="robozinho" parent="pets" unique_id=359801464 instance=ExtResource("22_ostd4")]
+transform = Transform3D(-16.060778, 0, 25.338734, 0, 29.999998, 0, -25.338734, 0, -16.060778, 11.285681, 2.4998772, -4.755405)
+visible = false
+
+[node name="SpotLight3D" type="SpotLight3D" parent="pets/robozinho" unique_id=1915445032]
+transform = Transform3D(0.027032685, -0.014992446, -0.012472831, 0.014992446, 0.0023413296, 0.029679215, -0.012472831, -0.029679213, 0.008641976, -0.00891383, 0.06604446, 0.0059548616)
+light_color = Color(1, 0.69803923, 1, 1)
+light_energy = 3.028
+spot_range = 2.853131
+spot_angle = 68.90625
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=421943866]
+process_mode = 3
+stream = ExtResource("23_em6j3")
+volume_db = -6.589
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=142863757]
+process_mode = 3
+stream = ExtResource("24_7lu6d")
+
 [connection signal="body_entered" from="housevigili/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="housevigili/Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Area3D" to="CanvasLayer/hud" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="CanvasLayer/hud" method="_on_area_3d_body_exited"]

@@ -10,6 +10,12 @@ const CAIXAS = preload("res://cenas/models/caixas.tscn")
 @export var pontoDoPl: Marker3D
 @export var player: CharacterBody3D
 @export var dialogos: CanvasLayer
+@export var p_1: Node3D 
+@export var p_2: Node3D 
+@export var p_3: Node3D 
+@export var p_4: Node3D 
+@export var p_5: Node3D 
+
 
 var quantidadeDeVezes: int = 0
 
@@ -81,7 +87,7 @@ func _process(_delta: float) -> void:
 		and Input.is_action_just_pressed("interagir")
 		and (
 			Gobla.atividadeDahora == "PODEPEGARCAIXA"
-			or Gobla.atividadeDahora == "CAIXASENTREGES"
+			or Gobla.atividadeDahora == "CAIXASENTREGES" or Gobla.atividadeDahora == "UTIMASHORA"
 		)
 	):
 		pegar_novas_caixas()

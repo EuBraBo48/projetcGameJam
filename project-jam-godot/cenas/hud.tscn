@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://chk2ly7awk8p"]
 
 [ext_resource type="Script" uid="uid://lnegiujtdiig" path="res://scrits/hud.gd" id="1_nkjil"]
+[ext_resource type="FontFile" uid="uid://usbeqmbt7b8v" path="res://Xolonium-Regular.ttf" id="2_8alo0"]
+[ext_resource type="Texture2D" uid="uid://bgtgjokyutd50" path="res://models/FTS/fundoH.png" id="2_jfuea"]
+[ext_resource type="Texture2D" uid="uid://hqso2roovpb" path="res://models/FTS/cardeneta.png" id="3_vbhdj"]
+[ext_resource type="Texture2D" uid="uid://bxwq2yvi5awt" path="res://models/FTS/fundoAtvi.png" id="4_jnuu4"]
+[ext_resource type="Texture2D" uid="uid://dsdwvf0fgcxvl" path="res://models/FTS/fundoH2.png" id="6_345sl"]
+[ext_resource type="Texture2D" uid="uid://cxbyl1qvr4r7p" path="res://models/FTS/fundoDaContage.png" id="6_nhlvs"]
 
 [node name="hud" type="Control" unique_id=798942227 node_paths=PackedStringArray("info", "atividd", "hora", "contagem_regressiva", "menu_com_listagem", "menu_morte", "imagan")]
 process_mode = 3
@@ -17,16 +23,25 @@ hora = NodePath("hora")
 contagem_regressiva = NodePath("contagem")
 menu_com_listagem = NodePath("menu com listagem")
 menu_morte = NodePath("menuMORTE")
-imagan = NodePath("imagan")
+imagan = NodePath("Cardeneta")
+
+[node name="FundoH" type="Sprite2D" parent="." unique_id=1802921185]
+position = Vector2(67, 28)
+scale = Vector2(3.3125, 3.1875002)
+texture = ExtResource("2_jfuea")
 
 [node name="hora" type="Label" parent="." unique_id=484912107]
 layout_mode = 0
-offset_left = 28.0
-offset_top = 11.0
-offset_right = 80.0
-offset_bottom = 39.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
+offset_left = 24.0
+offset_top = 9.0
+offset_right = 103.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_8alo0")
+theme_override_font_sizes/font_size = 25
 text = "12:12"
 
 [node name="menu com listagem" type="Control" parent="." unique_id=2073115474]
@@ -35,91 +50,146 @@ anchors_preset = 0
 offset_right = 1155.0
 offset_bottom = 650.0
 
-[node name="ColorRect" type="ColorRect" parent="menu com listagem" unique_id=1321450825]
-layout_mode = 0
-offset_left = 599.0
-offset_top = 52.0
-offset_right = 938.0
-offset_bottom = 522.0
-color = Color(0, 0, 0, 1)
+[node name="FundoAtvi" type="Sprite2D" parent="menu com listagem" unique_id=975191126]
+position = Vector2(931, 308)
+scale = Vector2(15, 15)
+texture = ExtResource("4_jnuu4")
 
 [node name="info" type="RichTextLabel" parent="menu com listagem" unique_id=1341161414]
 layout_mode = 0
-offset_left = 621.0
-offset_top = 101.0
-offset_right = 836.0
-offset_bottom = 492.0
-text = "E̶u̶f̶i̶z̶i̶s̶s̶o̶"
+offset_left = 802.0
+offset_top = 185.0
+offset_right = 1018.0
+offset_bottom = 499.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "E̶u̶f̶i̶z̶i̶s̶s̶o̶dfd"
 
-[node name="imagan" type="ColorRect" parent="." unique_id=255230663]
-layout_mode = 0
-offset_left = 1072.0
-offset_top = 570.0
-offset_right = 1144.0
-offset_bottom = 644.0
+[node name="Cardeneta" type="Sprite2D" parent="." unique_id=984697177]
+position = Vector2(1079, 588)
+scale = Vector2(3, 3)
+texture = ExtResource("3_vbhdj")
 
 [node name="atividd" type="Label" parent="." unique_id=858953246]
 layout_mode = 0
-offset_left = 717.0
-offset_top = 11.0
-offset_right = 1145.0
-offset_bottom = 39.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-text = "Entregar o máximo de caixas e sair vazado"
+offset_left = 559.0
+offset_top = 7.0
+offset_right = 1121.0
+offset_bottom = 38.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_8alo0")
+theme_override_font_sizes/font_size = 25
+text = "Ir na agência da feira livre"
+
+[node name="FundoDaContage" type="Sprite2D" parent="." unique_id=2072768400]
+position = Vector2(1088, 124)
+scale = Vector2(3, 3)
+texture = ExtResource("6_nhlvs")
 
 [node name="contagem" type="Label" parent="." unique_id=336480677]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.018000001
-offset_left = 296.0
-offset_top = 42.0
-offset_right = 336.0
-offset_bottom = 53.336
+offset_left = 1058.0
+offset_top = 95.0
+offset_right = 1098.0
+offset_bottom = 114.336
+theme_override_fonts/font = ExtResource("2_8alo0")
+theme_override_font_sizes/font_size = 25
+text = "12"
 
 [node name="menu" type="Control" parent="." unique_id=1427923858]
+process_mode = 2
 visible = false
 anchors_preset = 0
 offset_right = 1155.0
 offset_bottom = 650.0
+
+[node name="FundoH" type="Sprite2D" parent="menu" unique_id=175288927]
+position = Vector2(557, 297.00003)
+scale = Vector2(5, 5)
+texture = ExtResource("2_jfuea")
+
+[node name="FundoH2" type="Sprite2D" parent="menu" unique_id=2124053058]
+position = Vector2(555, 366.00003)
+scale = Vector2(5, 5)
+texture = ExtResource("2_jfuea")
 
 [node name="Button" type="Button" parent="menu" unique_id=1450671282]
 layout_mode = 0
-offset_left = 485.0
-offset_top = 280.0
-offset_right = 624.0
-offset_bottom = 323.0
+offset_left = 483.0
+offset_top = 262.0
+offset_right = 622.0
+offset_bottom = 312.0
+theme_override_fonts/font = ExtResource("2_8alo0")
+theme_override_font_sizes/font_size = 30
 text = "volta"
+flat = true
 
 [node name="Button2" type="Button" parent="menu" unique_id=855673436]
 layout_mode = 0
-offset_left = 484.0
-offset_top = 325.0
-offset_right = 624.0
-offset_bottom = 368.0
+offset_left = 481.0
+offset_top = 335.0
+offset_right = 621.0
+offset_bottom = 385.0
+theme_override_fonts/font = ExtResource("2_8alo0")
+theme_override_font_sizes/font_size = 30
 text = "sair"
+flat = true
 
 [node name="menuMORTE" type="Control" parent="." unique_id=434522061]
+process_mode = 2
 visible = false
 anchors_preset = 0
 offset_right = 1155.0
 offset_bottom = 650.0
 
+[node name="FundoH2" type="Sprite2D" parent="menuMORTE" unique_id=1397317054]
+position = Vector2(551.00006, 290)
+scale = Vector2(5, 5)
+texture = ExtResource("6_345sl")
+
+[node name="FundoH3" type="Sprite2D" parent="menuMORTE" unique_id=445195911]
+position = Vector2(554, 364)
+scale = Vector2(5, 5)
+texture = ExtResource("6_345sl")
+
 [node name="mort1" type="Button" parent="menuMORTE" unique_id=351407928]
 layout_mode = 0
-offset_left = 485.0
-offset_top = 280.0
-offset_right = 624.0
-offset_bottom = 323.0
+offset_left = 478.0
+offset_top = 259.0
+offset_right = 617.0
+offset_bottom = 309.0
+theme_override_fonts/font = ExtResource("2_8alo0")
+theme_override_font_sizes/font_size = 30
 text = "renasce"
+flat = true
 
 [node name="mort2" type="Button" parent="menuMORTE" unique_id=747642334]
 layout_mode = 0
-offset_left = 484.0
-offset_top = 325.0
-offset_right = 624.0
-offset_bottom = 368.0
+offset_left = 481.99994
+offset_top = 338.99997
+offset_right = 621.99994
+offset_bottom = 383.99997
+theme_override_fonts/font = ExtResource("2_8alo0")
+theme_override_font_sizes/font_size = 30
 text = "sair"
+flat = true
+
+[node name="Label" type="Label" parent="." unique_id=863095386]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="menu/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="menu/Button2" to="." method="_on_button_2_pressed"]

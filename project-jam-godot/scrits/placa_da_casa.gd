@@ -230,11 +230,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if (
-		estaNaAre
-		and Input.is_action_just_pressed("interagir")
-		and Gobla.atividadeDahora == "ENTRAGACAIXAS"
-	):
+	if estaNaAre and Input.is_action_just_pressed("interagir") and (Gobla.atividadeDahora == "ENTRAGACAIXAS" or Gobla.atividadeDahora == "UTIMASHORA"):
 		verificar_caixa()
 
 

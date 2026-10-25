@@ -22,11 +22,16 @@ var marcados: Array[int] = []
 @export var npcs_para_sumir: Array[Node3D] = []
 @export var ambiente: WorldEnvironment
 @export var menu_morte: Control
-@export var imagan: ColorRect
+@export var imagan: Sprite2D
 
 @export_group("Jumpscare")
 @export var jumpscare: PackedScene
 @export var marcador_susto: Marker3D
+
+var tempo_partida_segundos: float = 0.0
+var partida_registrada: bool = false
+var jogador_na_area_fuga: bool = false
+var fuga_ativada: bool = false
 
 var npcs_sumiram: bool = false
 var jumpscare_criado: bool = false
@@ -35,7 +40,7 @@ var hora_jogo: int = 18
 var minuto_jogo: int = 0
 var tempo_acumulado: float = 0.0
 
-const SEGUNDOS_POR_HORA: float = 60.0
+const SEGUNDOS_POR_HORA: float = 100.0
 
 var contagem_ativa: bool = false
 var segundos_restantes: int = 60
@@ -43,6 +48,16 @@ var tempo_contagem: float = 0.0
 var contagem_finalizada: bool = false
 
 var dialogos_horarios_exibidos: Array[int] = []
+var DialogFuga: Dictionary = {
+	0: {
+		"title": "Marcos",
+		"dialog": "Ufa! Consegui sair de lá! Por pouco eu não fiquei preso naquela cidade maldita..."
+	},
+	1: {
+		"title": "Marcos",
+		"dialog": "Eu preciso ir embora dessa cidade. Depois de tudo que aconteceu, nunca mais quero voltar aqui."
+	}
+}
 
 var DialogMarcos20: Dictionary = {
 	0: {
@@ -101,6 +116,9 @@ var DialogMarcos00: Dictionary = {
 func _ready() -> void:
 	add_to_group("hud_entregas")
 
+	# A HUD precisa continuar funcionando durante a pausa.
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 	if is_instance_valid(menu_com_listagem):
 		menu_com_listagem.visible = false
 
@@ -109,6 +127,7 @@ func _ready() -> void:
 
 	if is_instance_valid(contagem_regressiva):
 		contagem_regressiva.hide()
+		$FundoDaContage.hide()
 		contagem_regressiva.text = "60"
 
 	atualizar_hora()
@@ -116,24 +135,67 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# O menu de pausa continua respondendo mesmo com o jogo pausado.
 	if Input.is_action_just_pressed("pause") and Gobla.atividadeDahora != "UTIMASHORA":
 		if $menu.visible:
-			get_tree().paused = false
 			$menu.hide()
+			get_tree().paused = false
 			imagan.show()
 			atividd.show()
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
-			get_tree().paused = true
 			$menu.show()
 			imagan.hide()
 			atividd.hide()
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			get_tree().paused = true
 
+	# IMPORTANTE:
+	# Se o jogo estiver pausado, nada abaixo avança.
+	if get_tree().paused:
+		return
+
+	# Tempo total da partida.
+	if not partida_registrada:
+		tempo_partida_segundos += delta
+
+	if jogador_na_area_fuga and not fuga_ativada:
+		if Input.is_action_just_pressed("interagir"):
+			if Gobla.atividadeDahora == "UTIMASHORA" and not contagem_finalizada and segundos_restantes > 0:
+				fuga_ativada = true
+				print("FUGA ATIVADA!")
+
+				if is_instance_valid(dialogos):
+					dialogos.call("dialogDiarioAbri", {
+						0: {
+							"title": "Marcos",
+							"dialog": "Ufa! Consegui sair de lá! Por pouco eu não fiquei preso naquela cidade maldita..."
+						},
+						1: {
+							"title": "Marcos",
+							"dialog": "Preciso ir embora daqui. Nunca mais quero voltar a essa cidade!"
+						}
+					})
+
+				await get_tree().create_timer(3.0).timeout
+
+				# REGISTRAR O RESULTADO NO RANKING
+				registrar_resultado_partida(false)
+
+				Gobla.morreu = true
+				Gobla.atividadeDahora = "PODEPEGARCAIXA"
+
+				if is_instance_valid(ambiente) and is_instance_valid(ambiente.environment):
+					ambiente.environment.adjustment_enabled = true
+					ambiente.environment.adjustment_brightness = 1.0
+
+				get_tree().change_scene_to_file("res://cenas/main.tscn")
+	# Abre ou fecha a lista de entregas.
 	if Input.is_action_just_pressed("listra"):
 		if is_instance_valid(menu_com_listagem):
 			menu_com_listagem.visible = not menu_com_listagem.visible
 
+	# Relógio do jogo.
 	tempo_acumulado += delta
 
 	while tempo_acumulado >= SEGUNDOS_POR_HORA:
@@ -147,6 +209,7 @@ func _process(delta: float) -> void:
 		atualizar_hora()
 		verificar_dialogo_horario()
 
+	# Contagem regressiva da última hora.
 	if contagem_ativa and not contagem_finalizada:
 		tempo_contagem += delta
 
@@ -181,6 +244,7 @@ func _process(delta: float) -> void:
 			atividd.text = "Voltar para a agência e pegar mais caixas"
 		"UTIMASHORA":
 			atividd.text = "Entregar o máximo de caixas e sair vazado"
+
 
 
 # Recebe os endereços da remessa atual.
@@ -273,17 +337,30 @@ func iniciar_ultima_hora() -> void:
 
 	if is_instance_valid(hora):
 		hora.hide()
+		$FundoH.hide()
+		$"../../AudioStreamPlayer".stop()
+		$"../../AudioStreamPlayer2".play()
 
-	segundos_restantes = 60
+	# Bônus do animal em segundos.
+	var bonus_animal: int = int(Gobla.tempo_extra_animal)
+
+	# 60 segundos iniciais mais o bônus.
+	segundos_restantes = 60 + bonus_animal
+
 	tempo_contagem = 0.0
 	contagem_ativa = true
 	contagem_finalizada = false
 
 	if is_instance_valid(contagem_regressiva):
-		contagem_regressiva.text = "60"
+		contagem_regressiva.text = str(segundos_restantes)
 		contagem_regressiva.show()
+		$FundoDaContage.show()
 
 	escurecer_ambiente()
+
+	print("HUD: animal selecionado: ", Gobla.animal_selecionado)
+	print("HUD: bônus de tempo: ", bonus_animal, " segundos")
+	print("HUD: tempo total para fugir: ", segundos_restantes, " segundos")
 
 
 func atualizar_contagem() -> void:
@@ -301,7 +378,7 @@ func escurecer_ambiente() -> void:
 		return
 
 	ambiente.environment.adjustment_enabled = true
-	ambiente.environment.adjustment_brightness = 0.55
+	ambiente.environment.adjustment_brightness = 0.41
 	print("HUD: o ambiente ficou mais escuro!")
 
 
@@ -360,8 +437,8 @@ func criar_jumpscare() -> void:
 
 
 func _on_button_pressed() -> void:
-	get_tree().paused = false
 	$menu.hide()
+	get_tree().paused = false
 	imagan.show()
 	atividd.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -372,12 +449,79 @@ func _on_button_2_pressed() -> void:
 
 
 func _on_mort_1_pressed() -> void:
-	get_tree().change_scene_to_file("res://cenas/main.tscn")
-	Gobla.atividadeDahora = "PODEPEGARCAIXA"
-	ambiente.environment.adjustment_enabled = true
-	ambiente.environment.adjustment_brightness = 1.0
+	registrar_resultado_partida(true)
+	get_tree().paused = false
 	Gobla.morreu = true
+	Gobla.atividadeDahora = "PODEPEGARCAIXA"
+
+	if is_instance_valid(ambiente) and is_instance_valid(ambiente.environment):
+		ambiente.environment.adjustment_enabled = true
+		ambiente.environment.adjustment_brightness = 1.0
+
+	get_tree().change_scene_to_file("res://cenas/main.tscn")
 
 
 func _on_mort_2_pressed() -> void:
 	get_tree().quit()
+
+
+func registrar_resultado_partida(morreu: bool) -> void:
+	if partida_registrada:
+		return
+
+	partida_registrada = true
+
+	var caixas_entregues: int = 0
+	var sistema = get_tree().get_first_node_in_group("sistema_caixas")
+
+	if sistema != null:
+		caixas_entregues = sistema.entregasCorretas
+
+	Gobla.registrar_partida(
+		int(tempo_partida_segundos),
+		caixas_entregues,
+		morreu
+	)
+
+	print("RANKING: partida registrada!")
+	print("Tempo: ", int(tempo_partida_segundos), " segundos")
+	print("Caixas: ", caixas_entregues)
+	print("Morreu: ", morreu)
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if not body.is_in_group("player"):
+		return
+
+	if Gobla.atividadeDahora != "UTIMASHORA":
+		return
+
+	jogador_na_area_fuga = true
+	fuga_ativada = false
+
+	print("Você entrou na área de fuga. Aperte E!")
+
+
+func _on_area_3d_body_exited(body: Node3D) -> void:
+	if not body.is_in_group("player"):
+		return
+
+	jogador_na_area_fuga = false
+
+	if Gobla.atividadeDahora != "UTIMASHORA":
+		return
+
+	if not fuga_ativada:
+		print("Você saiu sem ativar a fuga com E!")
+		return
+
+	if contagem_finalizada or segundos_restantes <= 0:
+		print("Tempo esgotado! Você não conseguiu fugir.")
+		fuga_ativada = false
+		return
+
+	fuga_ativada = false
+
+	print("SOBREVIVEU! Você fugiu antes do tempo acabar!")
+
+	registrar_resultado_partida(false)

@@ -61,8 +61,11 @@ var DialogMorte: Dictionary = {
 
 func _ready() -> void:
 	if Gobla.morreu:
+		$"../loginha".show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		dialogDiarioAbri(DialogMorte)
 	else:
+		
 		dialogDiarioAbri(DialogChefeDia1)
 
 

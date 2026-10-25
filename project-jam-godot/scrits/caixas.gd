@@ -12,7 +12,7 @@ extends Node3D
 @export var forcaArremesso: float = 12.0
 
 @export var label: Label
-@export var fundoDo: ColorRect
+@export var fundoDo: Sprite2D
 
 @export var rotacaoCaixa: Vector3 = Vector3(-90, -90, 90)
 
@@ -85,6 +85,7 @@ func _ready() -> void:
 
 	if fundoDo:
 		fundoDo.hide()
+		$CanvasLayer/Label.hide()
 
 
 func _process(delta: float) -> void:
@@ -286,13 +287,15 @@ func atualizar_label_caixa(caixa: MeshInstance3D) -> void:
 
 	if caixa == null or not is_instance_valid(caixa):
 		fundoDo.hide()
+		$CanvasLayer/Label.hide()
 		return
 
 	var numero := str(caixa.get_meta("numero_caixa", "??"))
 	var endereco := str(caixa.get_meta("endereco_casa", "SEM DESTINO"))
 
-	label.text = "CAIXA: " + numero + "\nPARA A CASA: " + endereco
+	label.text = "CAIXA: " + numero + "\nPARA A CASA:" + endereco
 	fundoDo.show()
+	$CanvasLayer/Label.show()
 
 
 func soltar_caixa(arremessar: bool) -> void:
@@ -301,6 +304,7 @@ func soltar_caixa(arremessar: bool) -> void:
 
 		if fundoDo:
 			fundoDo.hide()
+			$CanvasLayer/Label.hide()
 
 		return
 
@@ -331,6 +335,7 @@ func soltar_caixa(arremessar: bool) -> void:
 
 	if fundoDo:
 		fundoDo.hide()
+		$CanvasLayer/Label.hide()
 
 	if arremessar and rayJogador != null:
 		var camera = rayJogador.get_parent()

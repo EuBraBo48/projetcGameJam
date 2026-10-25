@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://8jalhdvh57n"]
 
-[ext_resource type="Texture2D" uid="uid://bus0malxjw3rk" path="res://models/FTS/m1.png" id="1_jj0w3"]
+[ext_resource type="Script" uid="uid://dulnkei0rkoca" path="res://scrits/loginha.gd" id="1_bbhwa"]
+[ext_resource type="FontFile" uid="uid://usbeqmbt7b8v" path="res://Xolonium-Regular.ttf" id="2_bbhwa"]
+[ext_resource type="Texture2D" uid="uid://dqgqlv4m2wtoh" path="res://models/FTS/fundoDialogCA.png" id="2_f4sf6"]
 [ext_resource type="Texture2D" uid="uid://cf27skqwy5ge1" path="res://models/FTS/m2.png" id="2_xhi53"]
 [ext_resource type="Texture2D" uid="uid://cgllrc3uuv5je" path="res://models/FTS/m3.png" id="3_bbhwa"]
 [ext_resource type="Texture2D" uid="uid://62yjb22vw1k" path="res://models/FTS/m4.png" id="4_f4sf6"]
@@ -12,13 +14,22 @@
 [ext_resource type="Texture2D" uid="uid://cvpgh812nhxse" path="res://models/FTS/p4.png" id="9_qtv0k"]
 [ext_resource type="Texture2D" uid="uid://c3naf707oytjk" path="res://models/FTS/p5.png" id="10_oa2q0"]
 
-[node name="loginha" type="Control" unique_id=1103721184]
+[node name="loginha" type="Control" unique_id=1103721184 node_paths=PackedStringArray("fundo_da_compra", "sprite_2d", "_name", "descrição", "compra", "ponto", "Rankponto")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_bbhwa")
+fundo_da_compra = NodePath("fundoDaCompra")
+sprite_2d = NodePath("fundoDaCompra/Sprite2D")
+_name = NodePath("fundoDaCompra/name")
+"descrição" = NodePath("fundoDaCompra/descrição")
+compra = NodePath("fundoDaCompra/compra")
+ponto = NodePath("principal/pontos")
+Rankponto = NodePath("fundoRank/rank")
 
 [node name="principal" type="Control" parent="." unique_id=48647866]
 anchors_preset = 0
@@ -27,10 +38,16 @@ offset_bottom = 40.0
 
 [node name="fundo" type="ColorRect" parent="principal" unique_id=1704287803]
 layout_mode = 0
-offset_right = 1155.0
-offset_bottom = 637.0
-color = Color(0.3403393, 0.34033933, 0.3403393, 1)
-metadata/_edit_lock_ = true
+offset_right = 1159.0
+offset_bottom = 652.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="principal/fundo" unique_id=1102677616]
+layout_mode = 0
+offset_right = 1159.0
+offset_bottom = 645.0
+texture = ExtResource("2_f4sf6")
+stretch_mode = 1
 
 [node name="fundoDaVitrine1" type="ColorRect" parent="principal" unique_id=654897816]
 layout_mode = 0
@@ -38,7 +55,7 @@ offset_left = 27.0
 offset_top = 66.0
 offset_right = 679.0
 offset_bottom = 293.0
-color = Color(0, 0, 0, 1)
+color = Color(0.80937904, 0.34147805, 0.13100359, 1)
 
 [node name="fundoDaVitrine2" type="ColorRect" parent="principal" unique_id=682983526]
 layout_mode = 0
@@ -46,38 +63,46 @@ offset_left = 22.0
 offset_top = 352.0
 offset_right = 674.0
 offset_bottom = 587.0
-color = Color(0, 0, 0, 1)
+color = Color(0.8974898, 0.39430347, 0.20611349, 1)
 
 [node name="pontos" type="Label" parent="principal" unique_id=1137884784]
 layout_mode = 0
-offset_left = 953.0
-offset_top = 9.0
-offset_right = 1046.0
-offset_bottom = 32.0
+offset_left = 965.0
+offset_top = 25.0
+offset_right = 1100.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("2_bbhwa")
+theme_override_font_sizes/font_size = 20
 text = "PONTOS: 00"
 
 [node name="titulo" type="Label" parent="principal" unique_id=1754411259]
 layout_mode = 0
-offset_left = 18.0
-offset_top = 10.0
-offset_right = 201.0
-offset_bottom = 33.0
+offset_left = 21.0
+offset_top = 17.0
+offset_right = 282.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("2_bbhwa")
+theme_override_font_sizes/font_size = 20
 text = "LOJINHA DO BRABINHO"
 
 [node name="tituloDoP" type="Label" parent="principal" unique_id=1014867614]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 65.0
-offset_right = 170.0
-offset_bottom = 88.0
+offset_left = 41.0
+offset_top = 80.0
+offset_right = 175.0
+offset_bottom = 105.0
+theme_override_fonts/font = ExtResource("2_bbhwa")
+theme_override_font_sizes/font_size = 20
 text = "Pets"
 
 [node name="tituloDoM" type="Label" parent="principal" unique_id=520596595]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 41.0
 offset_top = 361.0
-offset_right = 166.0
-offset_bottom = 384.0
+offset_right = 175.0
+offset_bottom = 386.0
+theme_override_fonts/font = ExtResource("2_bbhwa")
+theme_override_font_sizes/font_size = 20
 text = "player"
 
 [node name="vitrine" type="Control" parent="." unique_id=1698455163]
@@ -87,7 +112,7 @@ offset_bottom = 40.0
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="vitrine" unique_id=1066570914 node_paths=PackedStringArray("area_sprites")]
 layout_mode = 0
-offset_left = 31.0
+offset_left = 24.0
 offset_top = 352.0
 offset_right = 655.0
 offset_bottom = 580.0
@@ -97,37 +122,64 @@ area_sprites = NodePath("Control")
 [node name="Control" type="Control" parent="vitrine/ScrollContainer2" unique_id=1444909354]
 layout_mode = 2
 
-[node name="M1" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=780097763]
-position = Vector2(114.000015, 146)
-scale = Vector2(0.2755611, 0.39087757)
-texture = ExtResource("1_jj0w3")
-
 [node name="M2" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=2107209281]
-position = Vector2(366, 139)
+position = Vector2(133.13434, 131.36115)
 scale = Vector2(0.31329075, 0.39087757)
 texture = ExtResource("2_xhi53")
 
+[node name="Buttonm2" type="Button" parent="vitrine/ScrollContainer2/Control/M2" unique_id=216397914]
+offset_left = -395.79846
+offset_top = -207.22595
+offset_right = 376.64697
+offset_bottom = 204.6676
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [node name="M3" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=1020322539]
-position = Vector2(613, 135.99994)
+position = Vector2(380.1343, 128.36108)
 scale = Vector2(0.2904326, 0.39087757)
 texture = ExtResource("3_bbhwa")
 
+[node name="Buttonm3" type="Button" parent="vitrine/ScrollContainer2/Control/M3" unique_id=1062105261]
+offset_left = -413.70142
+offset_top = -207.22595
+offset_right = 399.1855
+offset_bottom = 204.6676
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [node name="M4" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=1576351682]
-position = Vector2(808, 147)
+position = Vector2(651.13434, 125.361145)
 scale = Vector2(0.2755611, 0.39087757)
 texture = ExtResource("4_f4sf6")
 
+[node name="Buttonm4" type="Button" parent="vitrine/ScrollContainer2/Control/M4" unique_id=310802526]
+offset_left = -413.70142
+offset_top = -207.22595
+offset_right = 399.1855
+offset_bottom = 204.6676
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [node name="M5" type="Sprite2D" parent="vitrine/ScrollContainer2/Control" unique_id=1723676546]
-position = Vector2(1069, 125.99997)
+position = Vector2(949.13434, 120.361145)
 scale = Vector2(0.2755611, 0.39087757)
 texture = ExtResource("5_tfrg6")
+
+[node name="Buttonm5" type="Button" parent="vitrine/ScrollContainer2/Control/M5" unique_id=870742744]
+offset_left = -413.70142
+offset_top = -207.22595
+offset_right = 399.1855
+offset_bottom = 204.6676
+flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="vitrine" unique_id=2080390749 node_paths=PackedStringArray("area_sprites")]
 layout_mode = 0
 offset_left = 29.0
-offset_top = 70.0
-offset_right = 666.0
-offset_bottom = 293.0
+offset_top = 72.0
+offset_right = 675.0
+offset_bottom = 297.0
 mouse_filter = 0
 script = ExtResource("6_xhi53")
 area_sprites = NodePath("HBoxContainer")
@@ -141,31 +193,60 @@ position = Vector2(116.28125, 121.718735)
 scale = Vector2(0.5332584, 0.5471214)
 texture = ExtResource("6_q0vx0")
 
-[node name="Button" type="Button" parent="vitrine/ScrollContainer/HBoxContainer/P1" unique_id=869015018]
+[node name="ButtonP1" type="Button" parent="vitrine/ScrollContainer/HBoxContainer/P1" unique_id=869015018]
 offset_left = -197.4301
 offset_top = -154.84448
 offset_right = 198.25053
 offset_bottom = 155.87268
+flat = true
 
 [node name="P2" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=296345257]
 position = Vector2(348.00003, 116.999985)
 scale = Vector2(0.32344738, 0.40158)
 texture = ExtResource("7_twa6c")
 
+[node name="ButtonP2" type="Button" parent="vitrine/ScrollContainer/HBoxContainer/P2" unique_id=1238593952]
+offset_left = -349.3614
+offset_top = -211.66388
+offset_right = 358.63635
+offset_bottom = 201.70334
+flat = true
+
 [node name="P3" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=906975924]
 position = Vector2(572.08746, 116.968735)
 scale = Vector2(0.47396547, 0.47108462)
 texture = ExtResource("8_q0s3a")
+
+[node name="3" type="Button" parent="vitrine/ScrollContainer/HBoxContainer/P3" unique_id=501819396]
+offset_left = -219.60979
+offset_top = -174.00002
+offset_right = 212.91121
+offset_bottom = 176.25554
+flat = true
 
 [node name="P4" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=1957560330]
 position = Vector2(790, 120)
 scale = Vector2(0.41933575, 0.60943407)
 texture = ExtResource("9_qtv0k")
 
+[node name="ButtonP4" type="Button" parent="vitrine/ScrollContainer/HBoxContainer/P4" unique_id=1528252012]
+offset_left = -248.01134
+offset_top = -127.987595
+offset_right = 255.16542
+offset_bottom = 127.98758
+flat = true
+
 [node name="P5" type="Sprite2D" parent="vitrine/ScrollContainer/HBoxContainer" unique_id=150609601]
 position = Vector2(982, 123)
 scale = Vector2(0.3074458, 0.36752132)
 texture = ExtResource("10_oa2q0")
+
+[node name="ButtonP5" type="Button" parent="vitrine/ScrollContainer/HBoxContainer/P5" unique_id=2118866892]
+offset_left = -230.93498
+offset_top = -225.83725
+offset_right = 211.41939
+offset_bottom = 228.55817
+flat = true
 
 [node name="fundoDaCompra" type="ColorRect" parent="." unique_id=1120981697]
 visible = false
@@ -189,12 +270,12 @@ offset_right = 57.0
 offset_bottom = 25.0
 text = "nome"
 
-[node name="descrição" type="Label" parent="fundoDaCompra" unique_id=1551861823]
+[node name="descrição" type="RichTextLabel" parent="fundoDaCompra" unique_id=2110813706]
 layout_mode = 0
 offset_left = 27.0
 offset_top = 220.0
-offset_right = 497.0
-offset_bottom = 343.0
+offset_right = 534.0
+offset_bottom = 334.0
 text = "OQUE ELE FAZ DESCRIÇÂO"
 
 [node name="compra" type="Button" parent="fundoDaCompra" unique_id=775246461]
@@ -212,3 +293,61 @@ offset_top = 19.0
 offset_right = 672.0
 offset_bottom = 42.0
 text = "Ponto"
+
+[node name="volta" type="Button" parent="fundoDaCompra" unique_id=141027715]
+layout_mode = 0
+offset_left = 558.0
+offset_top = 282.0
+offset_right = 678.0
+offset_bottom = 330.0
+text = "volta"
+
+[node name="CheckBox" type="CheckBox" parent="fundoDaCompra" unique_id=2145995182]
+layout_mode = 0
+offset_left = 567.0
+offset_top = 224.0
+offset_right = 655.0
+offset_bottom = 255.0
+text = "equipar"
+
+[node name="fundoRank" type="ColorRect" parent="." unique_id=1869756505]
+layout_mode = 0
+offset_left = 769.0
+offset_top = 356.0
+offset_right = 1128.0
+offset_bottom = 619.0
+color = Color(0, 0, 0, 1)
+
+[node name="rank" type="Label" parent="fundoRank" unique_id=680475507]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 17.0
+offset_right = 352.0
+offset_bottom = 144.0
+text = "seu melhor tempo
+1 minutos 10
+1 minutos sk
+skksd
+sjkdksjdks"
+
+[node name="Fecha" type="Button" parent="." unique_id=1841845638]
+layout_mode = 0
+offset_left = 701.0
+offset_top = 587.0
+offset_right = 759.0
+offset_bottom = 618.0
+text = "fechar"
+
+[connection signal="pressed" from="vitrine/ScrollContainer2/Control/M2/Buttonm2" to="." method="_on_buttonm_2_pressed"]
+[connection signal="pressed" from="vitrine/ScrollContainer2/Control/M3/Buttonm3" to="." method="_on_buttonm_3_pressed"]
+[connection signal="pressed" from="vitrine/ScrollContainer2/Control/M4/Buttonm4" to="." method="_on_buttonm_4_pressed"]
+[connection signal="pressed" from="vitrine/ScrollContainer2/Control/M5/Buttonm5" to="." method="_on_buttonm_5_pressed"]
+[connection signal="pressed" from="vitrine/ScrollContainer/HBoxContainer/P1/ButtonP1" to="." method="_on_button_p_1_pressed"]
+[connection signal="pressed" from="vitrine/ScrollContainer/HBoxContainer/P2/ButtonP2" to="." method="_on_button_p_2_pressed"]
+[connection signal="pressed" from="vitrine/ScrollContainer/HBoxContainer/P3/3" to="." method="_on__pressed"]
+[connection signal="pressed" from="vitrine/ScrollContainer/HBoxContainer/P4/ButtonP4" to="." method="_on_button_p_4_pressed"]
+[connection signal="pressed" from="vitrine/ScrollContainer/HBoxContainer/P5/ButtonP5" to="." method="_on_button_p_5_pressed"]
+[connection signal="pressed" from="fundoDaCompra/compra" to="." method="_on_compra_pressed"]
+[connection signal="pressed" from="fundoDaCompra/volta" to="." method="_on_volta_pressed"]
+[connection signal="toggled" from="fundoDaCompra/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="Fecha" to="." method="_on_fecha_pressed"]

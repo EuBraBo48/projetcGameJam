@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://r4tlfvo84lx7"]
 
 [ext_resource type="Script" uid="uid://bk4w2b1paa3j8" path="res://scrits/dialog.gd" id="1_w71y7"]
+[ext_resource type="Texture2D" uid="uid://bjap0piivv1dn" path="res://models/FTS/fundoDialo.png" id="2_k1m0h"]
+[ext_resource type="FontFile" uid="uid://usbeqmbt7b8v" path="res://Xolonium-Regular.ttf" id="3_b878g"]
+[ext_resource type="AudioStream" uid="uid://sr3c3uvj4wq7" path="res://sons/dialog.wav" id="4_b878g"]
 
-[node name="Dialog" type="Control" unique_id=1036318063 node_paths=PackedStringArray("_name", "_texte")]
+[node name="Dialog" type="Control" unique_id=1036318063 node_paths=PackedStringArray("_name", "_texte", "som_letra")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -13,14 +16,12 @@ grow_vertical = 2
 script = ExtResource("1_w71y7")
 _name = NodePath("name")
 _texte = NodePath("dialog")
+som_letra = NodePath("AudioStreamPlayer")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=523602451]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 468.0
-offset_right = 826.0
-offset_bottom = 612.0
-color = Color(0, 0, 0, 1)
+[node name="FundoDialo" type="Sprite2D" parent="." unique_id=1920915808]
+position = Vector2(567, 419)
+scale = Vector2(11, 11)
+texture = ExtResource("2_k1m0h")
 
 [node name="name" type="Label" parent="." unique_id=241364516]
 layout_mode = 1
@@ -29,14 +30,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -545.0
-offset_top = 143.0
-offset_right = -433.0
-offset_bottom = 168.0
+offset_left = -299.0
+offset_top = 52.99994
+offset_right = -187.0
+offset_bottom = 77.99994
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.3764706, 0, 1)
 theme_override_colors/font_outline_color = Color(0.92099476, 0.9209946, 0.9209946, 1)
+theme_override_fonts/font = ExtResource("3_b878g")
 theme_override_font_sizes/font_size = 20
 text = "sdsdsdssd"
 horizontal_alignment = 1
@@ -48,12 +50,16 @@ anchor_left = 0.375
 anchor_top = 0.822
 anchor_right = 0.375
 anchor_bottom = 0.822
-offset_left = -408.0
-offset_top = -43.656006
-offset_right = 384.0
-offset_bottom = 74.343994
+offset_left = -154.0
+offset_top = -127.65607
+offset_right = 438.0
+offset_bottom = 38.343933
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/normal_font = ExtResource("3_b878g")
+theme_override_font_sizes/normal_font_size = 25
 text = "sdsdefefsdddsddwddsd"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=453967191]
+stream = ExtResource("4_b878g")

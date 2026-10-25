@@ -20,6 +20,11 @@ const CAMERA_SMOOTH = 10.0
 @export var door_point: Marker3D
 @export var dialogos: CanvasLayer 
 
+@export_category("Som do carro")
+@export var audio_motor: AudioStreamPlayer3D
+@export var velocidade_pitch: float = 0.8
+@export var pitch_maximo: float = 1.8
+
 var porta_aberta: bool = false
 var with_player: bool = false
 var player: CharacterBody3D = null
@@ -232,6 +237,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	move_and_slide()
+	atualizar_som_motor()
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -260,3 +266,29 @@ func _on_port_body_exited(body: Node3D) -> void:
 		estAre = false
 		if input_label2:
 			input_label2.hide()
+
+
+
+func atualizar_som_motor() -> void:
+	if audio_motor == null:
+		return
+
+	if not with_player:
+		if audio_motor.playing:
+			audio_motor.stop()
+		return
+
+	var velocidade_atual := Vector2(velocity.x, velocity.z).length()
+
+	if velocidade_atual > 0.5:
+		if not audio_motor.playing:
+			audio_motor.play()
+
+		audio_motor.pitch_scale = clamp(
+			1.0 + velocidade_atual * velocidade_pitch / MAX_SPEED,
+			1.0,
+			pitch_maximo
+		)
+	else:
+		if audio_motor.playing:
+			audio_motor.stop()

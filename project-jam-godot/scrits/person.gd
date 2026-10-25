@@ -23,11 +23,10 @@ var DialogNPC_Bia: Dictionary = {
 	0: {"title": "Bia", "dialog": "Moço! Moço! Você está entregando caixas por toda a cidade?"},
 	1: {"title": "Marcos", "dialog": "Estou sim. Ainda tenho bastante trabalho pela frente."},
 	2: {"title": "Bia", "dialog": "Então você vai passar perto da floresta?"},
-	3: {"title": "Marcos", "dialog": "Acho que sim. Tem alguma coisa lá?"},
-	4: {"title": "Bia", "dialog": "Meu irmão disse que viu alguém andando entre as árvores ontem à noite."},
-	5: {"title": "Marcos", "dialog": "Deve ser alguém usando uma fantasia de Halloween."},
-	6: {"title": "Bia", "dialog": "Mas ele disse que aquela coisa estava andando sem ter cabeça..."},
-	7: {"title": "Marcos", "dialog": "Tá bom... vou fingir que não ouvi isso."}
+	3: {"title": "Marcos", "dialog": "que floresta menina está doida??"},
+	4: {"title": "Bia", "dialog": "tenho certeza moço, olha pra cima tem uma grande floresta de doçes"},
+	5: {"title": "Marcos", "dialog": "tá bom, vou acredida"},
+	6: {"title": "Bia", "dialog": "ebaaaaaaa"},
 }
 
 var DialogNPC_Lucia: Dictionary = {

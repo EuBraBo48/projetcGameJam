@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b71nd5t8b7x17" path="res://models/lobo.png" id="1_5qrea"]
 [ext_resource type="Script" uid="uid://clpugv6mj4r76" path="res://scrits/jumpscren.gd" id="1_b2lfi"]
+[ext_resource type="AudioStream" uid="uid://vnd2whgtsci5" path="res://sons/sust.wav" id="3_g0c27"]
 
 [sub_resource type="Animation" id="Animation_b2lfi"]
 length = 0.001
@@ -55,6 +56,7 @@ pixel_size = 0.001
 texture = ExtResource("1_5qrea")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=63064421]
+stream = ExtResource("3_g0c27")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1584032290]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17225507, 0.879186, -0.05725211)

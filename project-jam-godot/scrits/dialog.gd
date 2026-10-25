@@ -1,4 +1,3 @@
-
 extends Control
 class_name DialogScren
 
@@ -11,6 +10,7 @@ var _pular_texto: bool = false
 @export_category("Objects")
 @export var _name: Label = null
 @export var _texte: RichTextLabel = null
+@export var som_letra: AudioStreamPlayer = null
 
 
 func _ready() -> void:
@@ -28,6 +28,9 @@ func _process(_delta: float) -> void:
 			_id += 1
 
 			if _id >= data.size():
+				if is_instance_valid(som_letra):
+					som_letra.stop()
+
 				get_tree().paused = false
 				queue_free()
 				return
@@ -37,6 +40,9 @@ func _process(_delta: float) -> void:
 
 func _initialice_dialog() -> void:
 	if not data.has(_id):
+		if is_instance_valid(som_letra):
+			som_letra.stop()
+
 		get_tree().paused = false
 		queue_free()
 		return
@@ -53,7 +59,14 @@ func _initialice_dialog() -> void:
 			_texte.visible_characters = -1
 			break
 
+		# Toca o som enquanto as letras aparecem.
+		if is_instance_valid(som_letra) and not som_letra.playing:
+			som_letra.play()
+
 		await get_tree().create_timer(_speed).timeout
 		_texte.visible_characters += 1
+
+	if is_instance_valid(som_letra):
+		som_letra.stop()
 
 	_escrevendo = false

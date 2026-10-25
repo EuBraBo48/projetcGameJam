@@ -9,17 +9,24 @@
 [ext_resource type="PackedScene" uid="uid://dippydeg72fyl" path="res://models/mao/m5.glb" id="7_4y2i1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yf5fn"]
+height = 2.184082
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 radius = 0.41015625
 height = 1.5678711
 
-[node name="player" type="CharacterBody3D" unique_id=1142826060 node_paths=PackedStringArray("ray_cast_3d") groups=["player"]]
+[node name="player" type="CharacterBody3D" unique_id=1142826060 node_paths=PackedStringArray("ray_cast_3d", "barra_dash", "m_1", "m_2", "m_3", "m_4", "m_5") groups=["player"]]
 script = ExtResource("1_8or6t")
 ray_cast_3d = NodePath("Camera3D/RayCast3D")
+barra_dash = NodePath("ProgressBar")
+m_1 = NodePath("m1")
+m_2 = NodePath("m2")
+m_3 = NodePath("m3")
+m_4 = NodePath("m4")
+m_5 = NodePath("m5")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1614515072]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03008008, 0.44410962, -0.42560685)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03008008, 0.7007547, -0.42560685)
 script = ExtResource("2_unwft")
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1532099310]
@@ -34,7 +41,7 @@ spot_attenuation = 0.26
 spot_angle = 48.31043
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2087020867]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.073632814, 0)
 mesh = SubResource("CapsuleMesh_yf5fn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=289714203]
@@ -42,20 +49,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0056152344, -0.00090789
 shape = SubResource("CapsuleShape3D_g4v7s")
 
 [node name="m1" parent="." unique_id=313733323 instance=ExtResource("3_kthid")]
-transform = Transform3D(-0.299748, 0, -0.012293638, 0, 0.3, 0, 0.012293638, 0, -0.299748, 0.13530284, 0.08725673, 0.14423668)
+transform = Transform3D(-0.299748, 0, -0.012293638, 0, 0.3, 0, 0.012293638, 0, -0.299748, 0.13530284, 0.380561, 0.14423668)
 visible = false
 
 [node name="m2" parent="." unique_id=2120074028 instance=ExtResource("4_xojfc")]
-transform = Transform3D(-1.9938632, 0, -0.15655442, 0, 2, 0, 0.15655442, 0, -1.9938632, 0.021739721, 0.12636149, -0.43711632)
+transform = Transform3D(-1.9938632, 0, -0.15655442, 0, 2, 0, 0.15655442, 0, -1.9938632, 0.021739721, 0.41966575, -0.43711632)
 visible = false
 
 [node name="m3" parent="." unique_id=1845516931 instance=ExtResource("5_8v4ht")]
-transform = Transform3D(-0.029997282, 0, -0.00040384004, 0, 0.03, 0, 0.00040384004, 0, -0.029997282, -0.020415306, 0, -0.42858028)
+transform = Transform3D(-0.029997282, 0, -0.00040384004, 0, 0.03, 0, 0.00040384004, 0, -0.029997282, -0.020415306, 0.29330426, -0.42858028)
 visible = false
 
 [node name="m4" parent="." unique_id=242677855 instance=ExtResource("6_4y2i1")]
-transform = Transform3D(0.0069836304, 0, 0.9999757, 0, 1, 0, -0.9999757, 0, 0.0069836304, -0.039937317, -0.00024092197, -0.40374994)
+transform = Transform3D(0.0069836304, 0, 0.9999757, 0, 1, 0, -0.9999757, 0, 0.0069836304, -0.039937317, 0.29306334, -0.40374994)
 visible = false
 
 [node name="m5" parent="." unique_id=716026961 instance=ExtResource("7_4y2i1")]
-transform = Transform3D(-0.01999631, 0, -0.0003840999, 0, 0.02, 0, 0.0003840999, 0, -0.01999631, 0.07429087, 0.31493223, -1.078615)
+transform = Transform3D(-0.01999631, 0, -0.0003840999, 0, 0.02, 0, 0.0003840999, 0, -0.01999631, 0.07429087, 0.6082365, -1.078615)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1818079714]
+offset_left = 425.0
+offset_top = 608.0
+offset_right = 631.0
+offset_bottom = 635.0

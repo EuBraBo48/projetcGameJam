@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dc0lxotswtfmc"]
+
+[node name="menu" type="Control" unique_id=1686904356]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="play" type="Button" parent="." unique_id=1619932393]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 100.0
+offset_right = 243.0
+offset_bottom = 131.0
+text = "JOGAR"
+
+[node name="sair" type="Button" parent="." unique_id=114630830]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 208.0
+offset_right = 241.0
+offset_bottom = 239.0
+text = "sair
+"
+
+[node name="creditos" type="Button" parent="." unique_id=11307168]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 159.0
+offset_right = 241.0
+offset_bottom = 190.0
+text = "creditos"
