@@ -98,25 +98,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.274821, 2.241393, -14.84434
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0769205, 2.2413907, -14.811329)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1934276218]
+visible = false
 layout_mode = 0
-offset_left = 276.0
+offset_left = 280.0
 offset_top = 53.0
-offset_right = 883.0
-offset_bottom = 474.0
-color = Color(1, 0.4955095, 0.32665777, 1)
+offset_right = 1059.0
+offset_bottom = 521.0
+color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="ColorRect" unique_id=2090156013]
 layout_mode = 0
-offset_right = 592.0
+offset_right = 1230.0
 offset_bottom = 410.0
-text = "wrwew"
+theme_override_fonts/font = ExtResource("1_64url")
+theme_override_font_sizes/font_size = 20
+text = "## Créditos e agradecimentos
+
+**Desenvolvedor:** eubrabo
+
+**Músicas e efeitos sonoros:** Todos foram obtidos no site Pixaba
+
+**Modelos 3D:** Criados por Eubrabo e obtidos no Sketchfab
+
+**Código-fonte:** Todo o código do projeto está disponível no GitHub 
+para quem tiver interesse em conferir, estudar ou explorar como o jogo 
+foi desenvolvido.
+
+Obrigado a todos que contribuíram, 
+direta ou indiretamente, para a realização deste projeto!
+
+Desenvolvido para a **GodotSusto Jam**."
 
 [node name="volta" type="Button" parent="ColorRect" unique_id=645835656]
 layout_mode = 0
-offset_left = 540.0
-offset_top = 381.0
-offset_right = 587.0
-offset_bottom = 412.0
+offset_left = 688.0
+offset_top = 408.0
+offset_right = 735.0
+offset_bottom = 439.0
 text = "volta"
 
 [connection signal="pressed" from="VBoxContainer/play" to="." method="_on_play_pressed"]

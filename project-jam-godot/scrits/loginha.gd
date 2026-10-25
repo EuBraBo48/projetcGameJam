@@ -236,12 +236,7 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 			push_warning("LOJA: configure o nó main no Inspector.")
 			return
 
-		# Esconde todos os animais antes de mostrar o escolhido.
-		main.p_1.hide()
-		main.p_2.hide()
-		main.p_3.hide()
-		main.p_4.hide()
-		main.p_5.hide()
+
 
 		match N:
 			"Cachorro Olhudo":

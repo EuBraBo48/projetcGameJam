@@ -36,26 +36,32 @@ func _physics_process(delta: float) -> void:
 
 	var shift_pressionado := Input.is_key_pressed(KEY_SHIFT)
 
-	# A barra só recarrega depois que soltar o Shift.
-	if dash_recarregando:
-		if not shift_pressionado:
-			dash_tempo = move_toward(
-				dash_tempo,
-				DASH_TEMPO_MAX,
-				(DASH_TEMPO_MAX / DASH_RECARGA_TEMPO) * delta
-			)
+	# Se soltar Shift durante o dash, começa a recarga.
+	if not shift_pressionado and dash_ativo:
+		dash_ativo = false
+		dash_recarregando = true
 
-			if dash_tempo >= DASH_TEMPO_MAX:
-				dash_recarregando = false
+	# Recarrega até 100%, somente com Shift solto.
+	if dash_recarregando and not shift_pressionado:
+		dash_tempo = move_toward(
+			dash_tempo,
+			DASH_TEMPO_MAX,
+			(DASH_TEMPO_MAX / DASH_RECARGA_TEMPO) * delta
+		)
 
-	# Ativa o dash somente se houver energia e não estiver recarregando.
-	dash_ativo = (
+		if dash_tempo >= DASH_TEMPO_MAX:
+			dash_tempo = DASH_TEMPO_MAX
+			dash_recarregando = false
+
+	# Ativa o dash se houver energia e não estiver recarregando.
+	if (
 		shift_pressionado
 		and dash_tempo > 0.0
 		and not dash_recarregando
-	)
+	):
+		dash_ativo = true
 
-	# Consome a energia durante o dash.
+	# Consome energia enquanto corre.
 	if dash_ativo:
 		dash_tempo = maxf(dash_tempo - delta, 0.0)
 
@@ -63,7 +69,7 @@ func _physics_process(delta: float) -> void:
 			dash_ativo = false
 			dash_recarregando = true
 
-	# Atualiza a barra de energia.
+	# Atualiza a barra.
 	if barra_dash != null:
 		barra_dash.value = dash_tempo
 

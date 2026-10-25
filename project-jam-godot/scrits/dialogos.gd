@@ -20,7 +20,7 @@ var DialogChefeDia1: Dictionary = {
 		"title": "Marcos",
 	},
 	3: {
-		"dialog": "Tutorial: use WASD para se movimentar. Para entrar no carro, abrir a porta e pegar as caixas, aperte E. As missões estão na parte de cima da tela.",
+		"dialog": "Tutorial: Use WASD para se movimentar e segure Shift para correr mais rápido. Para entrar no carro, abrir a porta e pegar as caixas, aperte E. As missões estão na parte de cima da tela.",
 		"title": "Tutorial",
 	},
 	4: {

@@ -89,13 +89,13 @@ texture = ExtResource("6_nhlvs")
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.018000001
-offset_left = 1058.0
+offset_left = 1052.0
 offset_top = 95.0
-offset_right = 1098.0
+offset_right = 1105.0
 offset_bottom = 114.336
 theme_override_fonts/font = ExtResource("2_8alo0")
 theme_override_font_sizes/font_size = 25
-text = "12"
+text = "1"
 
 [node name="menu" type="Control" parent="." unique_id=1427923858]
 process_mode = 2
