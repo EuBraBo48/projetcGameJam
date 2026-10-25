@@ -20,4 +20,8 @@ func _on_sair_pressed() -> void:
 
 
 func _on_creditos_pressed() -> void:
-	pass # Replace with function body.
+	$ColorRect.show()
+
+
+func _on_volta_pressed() -> void:
+	$ColorRect.hide()

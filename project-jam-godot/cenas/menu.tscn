@@ -3,6 +3,29 @@
 [ext_resource type="FontFile" uid="uid://usbeqmbt7b8v" path="res://Xolonium-Regular.ttf" id="1_64url"]
 [ext_resource type="Script" uid="uid://c1mebswkj3yuq" path="res://scrits/menu.gd" id="1_nbnbt"]
 [ext_resource type="AudioStream" uid="uid://c3knufch0fqo4" path="res://sons/leberch-horror-music-box-375927.wav" id="3_hsu4v"]
+[ext_resource type="PackedScene" uid="uid://dw47gnftmhj4w" path="res://cenas/models/housevigili.tscn" id="4_qvcyk"]
+[ext_resource type="PackedScene" uid="uid://cgapwh8s8py52" path="res://models/caro/carro.glb" id="5_nxpqr"]
+[ext_resource type="PackedScene" uid="uid://dcxw2gyuwrifn" path="res://cenas/models/per/h_1.tscn" id="6_qcnrj"]
+[ext_resource type="PackedScene" uid="uid://c416iir6jfomy" path="res://cenas/models/per/h_2.tscn" id="7_qygre"]
+[ext_resource type="PackedScene" uid="uid://bgjinunann6if" path="res://cenas/models/per/m_2.tscn" id="8_6l0hd"]
+[ext_resource type="PackedScene" uid="uid://bfoypr7b6af7j" path="res://cenas/models/per/m_1.tscn" id="9_s4mth"]
+[ext_resource type="PackedScene" uid="uid://g54d6ya4dkcj" path="res://cenas/models/per/m_3.tscn" id="10_s4mth"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qvcyk"]
+sky_top_color = Color(0.25930315, 0.26626378, 0.14205226, 1)
+sky_horizon_color = Color(0.3826635, 0.38419574, 0.34528196, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.3826635, 0.38419574, 0.34528196, 1)
+
+[sub_resource type="Sky" id="Sky_nxpqr"]
+sky_material = SubResource("ProceduralSkyMaterial_qvcyk")
+
+[sub_resource type="Environment" id="Environment_qcnrj"]
+background_mode = 2
+sky = SubResource("Sky_nxpqr")
+fog_enabled = true
+fog_light_color = Color(0.9543722, 0.87862736, 0.78345156, 1)
+fog_light_energy = 0.07
 
 [node name="menu" type="Control" unique_id=1686904356]
 layout_mode = 3
@@ -12,6 +35,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nbnbt")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=480871677]
+environment = SubResource("Environment_qcnrj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1636967894]
 layout_mode = 1
@@ -45,6 +71,55 @@ text = "creditos"
 stream = ExtResource("3_hsu4v")
 autoplay = true
 
+[node name="Node3D" type="Node3D" parent="." unique_id=1205359484]
+
+[node name="housevigili" parent="Node3D" unique_id=86652010 instance=ExtResource("4_qvcyk")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.3867923, 0, 1.3079534)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D" unique_id=678247386]
+transform = Transform3D(1, 0, 0, 0, 0.779244, 0.6267207, 0, -0.6267207, 0.779244, 16.421415, 10.158237, -10.356841)
+
+[node name="carro" parent="Node3D" unique_id=933100249 instance=ExtResource("5_nxpqr")]
+transform = Transform3D(-0.034980588, 0, 0.49877486, 0, 0.5, 0, -0.49877486, 0, -0.034980588, 22.322142, 2, -26.613527)
+
+[node name="H1" parent="Node3D" unique_id=656443341 instance=ExtResource("6_qcnrj")]
+transform = Transform3D(0.36438867, 0, 0.93124694, 0, 1, 0, -0.93124694, 0, 0.36438867, 11.711406, 2.2489767, -16.69376)
+
+[node name="h2" parent="Node3D" unique_id=2046481105 instance=ExtResource("7_qygre")]
+transform = Transform3D(0.7556, 0, 0.65503335, 0, 1, 0, -0.65503335, 0, 0.7556, 12.183916, 2.2587328, -18.293724)
+
+[node name="M2" parent="Node3D" unique_id=737044476 instance=ExtResource("8_6l0hd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.623158, 2.2413945, -21.372303)
+
+[node name="M1" parent="Node3D" unique_id=2069760205 instance=ExtResource("9_s4mth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.274821, 2.241393, -14.844346)
+
+[node name="M3" parent="Node3D" unique_id=968369420 instance=ExtResource("10_s4mth")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0769205, 2.2413907, -14.811329)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1934276218]
+layout_mode = 0
+offset_left = 276.0
+offset_top = 53.0
+offset_right = 883.0
+offset_bottom = 474.0
+color = Color(1, 0.4955095, 0.32665777, 1)
+
+[node name="Label" type="Label" parent="ColorRect" unique_id=2090156013]
+layout_mode = 0
+offset_right = 592.0
+offset_bottom = 410.0
+text = "wrwew"
+
+[node name="volta" type="Button" parent="ColorRect" unique_id=645835656]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 381.0
+offset_right = 587.0
+offset_bottom = 412.0
+text = "volta"
+
 [connection signal="pressed" from="VBoxContainer/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/sair" to="." method="_on_sair_pressed"]
 [connection signal="pressed" from="VBoxContainer/creditos" to="." method="_on_creditos_pressed"]
+[connection signal="pressed" from="ColorRect/volta" to="." method="_on_volta_pressed"]
