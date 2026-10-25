@@ -13,7 +13,7 @@ config_version=5
 config/name="ProjectJamGodot"
 run/main_scene="uid://dc0lxotswtfmc"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://cw55ilefqwnl6"
 
 [autoload]
 
