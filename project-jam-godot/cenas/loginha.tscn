@@ -3,16 +3,26 @@
 [ext_resource type="Script" uid="uid://dulnkei0rkoca" path="res://scrits/loginha.gd" id="1_bbhwa"]
 [ext_resource type="FontFile" uid="uid://usbeqmbt7b8v" path="res://Xolonium-Regular.ttf" id="2_bbhwa"]
 [ext_resource type="Texture2D" uid="uid://dqgqlv4m2wtoh" path="res://models/FTS/fundoDialogCA.png" id="2_f4sf6"]
+[ext_resource type="Shader" uid="uid://chkmxsgny3t4y" path="res://sons/mini_game_das_ferramentas.tres" id="2_tfrg6"]
 [ext_resource type="Texture2D" uid="uid://cf27skqwy5ge1" path="res://models/FTS/m2.png" id="2_xhi53"]
 [ext_resource type="Texture2D" uid="uid://cgllrc3uuv5je" path="res://models/FTS/m3.png" id="3_bbhwa"]
 [ext_resource type="Texture2D" uid="uid://62yjb22vw1k" path="res://models/FTS/m4.png" id="4_f4sf6"]
+[ext_resource type="Texture2D" uid="uid://bdiqmupsgrxs4" path="res://models/FTS/fundorankf.png" id="4_oa2q0"]
+[ext_resource type="Texture2D" uid="uid://dsdwvf0fgcxvl" path="res://models/FTS/fundoH2.png" id="4_twa6c"]
 [ext_resource type="Texture2D" uid="uid://cmea7grbb3tvc" path="res://models/FTS/m5.png" id="5_tfrg6"]
+[ext_resource type="Texture2D" uid="uid://bgtgjokyutd50" path="res://models/FTS/fundoH.png" id="6_q0s3a"]
 [ext_resource type="Texture2D" uid="uid://dsrbh0bshpf3e" path="res://models/FTS/p2.png" id="6_q0vx0"]
 [ext_resource type="Script" uid="uid://upskncdigvm0" path="res://scrits/scroll_container.gd" id="6_xhi53"]
 [ext_resource type="Texture2D" uid="uid://dlk0tdcuqymuf" path="res://models/FTS/p1.png" id="7_twa6c"]
 [ext_resource type="Texture2D" uid="uid://17y3owxlc484" path="res://models/FTS/p3.png" id="8_q0s3a"]
 [ext_resource type="Texture2D" uid="uid://cvpgh812nhxse" path="res://models/FTS/p4.png" id="9_qtv0k"]
 [ext_resource type="Texture2D" uid="uid://c3naf707oytjk" path="res://models/FTS/p5.png" id="10_oa2q0"]
+[ext_resource type="Texture2D" uid="uid://cxbyl1qvr4r7p" path="res://models/FTS/fundoDaContage.png" id="17_q0s3a"]
+[ext_resource type="Texture2D" uid="uid://bp6irmy3d6j70" path="res://models/FTS/fundorank.png" id="17_qtv0k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bck4j"]
+shader = ExtResource("2_tfrg6")
+shader_parameter/Speed = Vector2(-0.1, -0.1)
 
 [node name="loginha" type="Control" unique_id=1103721184 node_paths=PackedStringArray("fundo_da_compra", "sprite_2d", "_name", "descrição", "compra", "ponto", "Rankponto")]
 process_mode = 3
@@ -29,7 +39,7 @@ _name = NodePath("fundoDaCompra/name")
 "descrição" = NodePath("fundoDaCompra/descrição")
 compra = NodePath("fundoDaCompra/compra")
 ponto = NodePath("principal/pontos")
-Rankponto = NodePath("fundoRank/rank")
+Rankponto = NodePath("rank")
 
 [node name="principal" type="Control" parent="." unique_id=48647866]
 anchors_preset = 0
@@ -43,78 +53,95 @@ offset_bottom = 652.0
 color = Color(0, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="principal/fundo" unique_id=1102677616]
+material = SubResource("ShaderMaterial_bck4j")
 layout_mode = 0
 offset_right = 1159.0
 offset_bottom = 645.0
 texture = ExtResource("2_f4sf6")
 stretch_mode = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="fundoDaVitrine1" type="ColorRect" parent="principal" unique_id=654897816]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 66.0
-offset_right = 679.0
-offset_bottom = 293.0
-color = Color(0.80937904, 0.34147805, 0.13100359, 1)
+[node name="Fundorankf" type="Sprite2D" parent="principal" unique_id=1083547996]
+position = Vector2(350.25, 310.5)
+scale = Vector2(10.742188, 9.109375)
+texture = ExtResource("4_oa2q0")
+
+[node name="Fundorankf2" type="Sprite2D" parent="principal" unique_id=927955904]
+position = Vector2(337, 578)
+scale = Vector2(10.742188, 8.507813)
+texture = ExtResource("4_oa2q0")
 
 [node name="fundoDaVitrine2" type="ColorRect" parent="principal" unique_id=682983526]
+visible = false
 layout_mode = 0
-offset_left = 22.0
-offset_top = 352.0
-offset_right = 674.0
-offset_bottom = 587.0
+offset_left = 25.0
+offset_top = 387.0
+offset_right = 677.0
+offset_bottom = 622.0
 color = Color(0.8974898, 0.39430347, 0.20611349, 1)
+
+[node name="FundoH2" type="Sprite2D" parent="principal" unique_id=338981893]
+position = Vector2(1039, 48)
+scale = Vector2(6.3124986, 4)
+texture = ExtResource("4_twa6c")
 
 [node name="pontos" type="Label" parent="principal" unique_id=1137884784]
 layout_mode = 0
-offset_left = 965.0
-offset_top = 25.0
-offset_right = 1100.0
-offset_bottom = 50.0
+offset_left = 970.0
+offset_top = 30.0
+offset_right = 1105.0
+offset_bottom = 55.0
 theme_override_fonts/font = ExtResource("2_bbhwa")
 theme_override_font_sizes/font_size = 20
 text = "PONTOS: 00"
 
+[node name="FundoH" type="Sprite2D" parent="principal" unique_id=1264583670]
+position = Vector2(157.5, 58)
+scale = Vector2(9.59375, 4.6875)
+texture = ExtResource("6_q0s3a")
+
 [node name="titulo" type="Label" parent="principal" unique_id=1754411259]
 layout_mode = 0
-offset_left = 21.0
-offset_top = 17.0
-offset_right = 282.0
-offset_bottom = 42.0
+offset_left = 22.499985
+offset_top = 39.0
+offset_right = 283.5
+offset_bottom = 64.0
 theme_override_fonts/font = ExtResource("2_bbhwa")
 theme_override_font_sizes/font_size = 20
 text = "LOJINHA DO BRABINHO"
 
 [node name="tituloDoP" type="Label" parent="principal" unique_id=1014867614]
 layout_mode = 0
-offset_left = 41.0
-offset_top = 80.0
-offset_right = 175.0
-offset_bottom = 105.0
+offset_left = 97.0
+offset_top = 113.0
+offset_right = 231.0
+offset_bottom = 138.0
 theme_override_fonts/font = ExtResource("2_bbhwa")
 theme_override_font_sizes/font_size = 20
 text = "Pets"
 
 [node name="tituloDoM" type="Label" parent="principal" unique_id=520596595]
 layout_mode = 0
-offset_left = 41.0
-offset_top = 361.0
-offset_right = 175.0
-offset_bottom = 386.0
+offset_left = 44.0
+offset_top = 396.0
+offset_right = 178.0
+offset_bottom = 421.0
 theme_override_fonts/font = ExtResource("2_bbhwa")
 theme_override_font_sizes/font_size = 20
 text = "player"
 
 [node name="vitrine" type="Control" parent="." unique_id=1698455163]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 3.0
+offset_top = 35.0
+offset_right = 43.0
+offset_bottom = 75.0
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="vitrine" unique_id=1066570914 node_paths=PackedStringArray("area_sprites")]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 352.0
-offset_right = 655.0
+offset_right = 541.0
 offset_bottom = 580.0
 script = ExtResource("6_xhi53")
 area_sprites = NodePath("Control")
@@ -176,10 +203,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="vitrine" unique_id=2080390749 node_paths=PackedStringArray("area_sprites")]
 layout_mode = 0
-offset_left = 29.0
-offset_top = 72.0
-offset_right = 675.0
-offset_bottom = 297.0
+offset_left = 31.0
+offset_top = 89.0
+offset_right = 500.0
+offset_bottom = 314.0
 mouse_filter = 0
 script = ExtResource("6_xhi53")
 area_sprites = NodePath("HBoxContainer")
@@ -310,33 +337,36 @@ offset_right = 655.0
 offset_bottom = 255.0
 text = "equipar"
 
-[node name="fundoRank" type="ColorRect" parent="." unique_id=1869756505]
-layout_mode = 0
-offset_left = 769.0
-offset_top = 356.0
-offset_right = 1128.0
-offset_bottom = 619.0
-color = Color(0, 0, 0, 1)
+[node name="Fundorank" type="Sprite2D" parent="." unique_id=774867277]
+position = Vector2(970, 443.00003)
+scale = Vector2(5.4531255, 5.6874995)
+texture = ExtResource("17_qtv0k")
 
-[node name="rank" type="Label" parent="fundoRank" unique_id=680475507]
+[node name="rank" type="Label" parent="." unique_id=680475507]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 17.0
-offset_right = 352.0
-offset_bottom = 144.0
+offset_left = 828.0
+offset_top = 385.0
+offset_right = 1103.0
+offset_bottom = 574.0
 text = "seu melhor tempo
 1 minutos 10
 1 minutos sk
 skksd
 sjkdksjdks"
 
+[node name="FundoDaContage" type="Sprite2D" parent="." unique_id=618455960]
+position = Vector2(739.00006, 614)
+scale = Vector2(2.703125, 2.7812495)
+texture = ExtResource("17_q0s3a")
+
 [node name="Fecha" type="Button" parent="." unique_id=1841845638]
 layout_mode = 0
 offset_left = 701.0
-offset_top = 587.0
+offset_top = 574.0
 offset_right = 759.0
-offset_bottom = 618.0
+offset_bottom = 628.0
 text = "fechar"
+flat = true
 
 [connection signal="pressed" from="vitrine/ScrollContainer2/Control/M2/Buttonm2" to="." method="_on_buttonm_2_pressed"]
 [connection signal="pressed" from="vitrine/ScrollContainer2/Control/M3/Buttonm3" to="." method="_on_buttonm_3_pressed"]
